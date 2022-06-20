@@ -46,19 +46,24 @@ public class ProfileBuilderController implements Initializable {
         AdminPersistentData.setUserCount((Integer)ois.readObject());
         ois.close();
 
-        User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText());
-        String file_path = "src/main/accounts/" + newUser.getName() + ".ser";
-        FileOutputStream fOut = new FileOutputStream(file_path);
-        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
-        oOut.writeObject(newUser);
-        oOut.close();
-        userNotification.setText("Usuário com ID " + newUser.getId() + " criado com Sucesso");
+        File user_file = new File("src/main/accounts/" + newUserField.getText() + ".ser");
+        if (!user_file.exists()) {
+            User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText());
+            String file_path = "src/main/accounts/" + newUser.getName() + ".ser";
+            FileOutputStream fOut = new FileOutputStream(file_path);
+            ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+            oOut.writeObject(newUser);
+            oOut.close();
+            userNotification.setText("Usuário de ID " + newUser.getId() + " criado com sucesso");
 
-        //Save Actual ID
-        FileOutputStream idStream = new FileOutputStream("src/main/accounts/idCount.ser");
-        ObjectOutputStream out = new ObjectOutputStream(idStream);
-        out.writeObject(AdminPersistentData.getUserCount(false));
-        out.close();
+            //Save Actual ID
+            FileOutputStream idStream = new FileOutputStream("src/main/accounts/idCount.ser");
+            ObjectOutputStream out = new ObjectOutputStream(idStream);
+            out.writeObject(AdminPersistentData.getUserCount(false));
+            out.close();
+        }else {
+            userNotification.setText("Usuário já existe");
+        }
     }
 
     @FXML

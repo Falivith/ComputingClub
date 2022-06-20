@@ -73,7 +73,7 @@ public class ProfileController implements Initializable {
     @FXML
     private TextArea postField;
 
-    ArrayList<String> timeline = new ArrayList<>();
+    ArrayList<Post> timeline = new ArrayList<>();
 
 
     @FXML
@@ -140,7 +140,6 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadFollows();
-        timeline.add("fim");
 
         UserHolder holder = UserHolder.getInstance();
         User actual = holder.getUser();
@@ -171,17 +170,16 @@ public class ProfileController implements Initializable {
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-        timeline.add(0, actual.getName() + " - " + formatter.format(date) + "\n" + postField.getText() + "\n\n");
+        Post post = new Post(actual.getName(), "\n" + postField.getText() + "\n\n", " - " + formatter.format(date));
+        timeline.add(0, post);
 
-        for (int i = 0; i >= 0; i++) {
-            if (timeline.get(i) != "fim") {
-                System.out.println(timeline.get(i));
-            }else {
-                break;
+        for (Post pos : timeline) {
+            if (pos.getAuthor().equals("aa")) {
+                System.out.println(pos.getAuthor() + pos.getDate() + pos.getContent());
             }
         }
 
-        String file_path = "src/main/posts/" + actual.getId() + ".ser";
+        String file_path = "src/main/posts/timeline.ser";
         FileOutputStream fOut = new FileOutputStream(file_path);
         ObjectOutputStream oOut = new ObjectOutputStream(fOut);
         oOut.writeObject(timeline);

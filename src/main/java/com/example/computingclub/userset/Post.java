@@ -1,6 +1,8 @@
 package com.example.computingclub.userset;
 
-public class Post {
+import java.io.Serializable;
+
+public class Post implements Serializable {
     private String author;
     private String content;
     private String date;
