@@ -76,4 +76,9 @@ public class SearchController implements Initializable {
         bgSearch.setPrefHeight(searchText.getBoundsInLocal().getHeight() + 50);
     }
 
+    @FXML
+    void actionISearch(ActionEvent event) {
+
+    }
+
 }

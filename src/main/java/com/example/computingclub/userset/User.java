@@ -16,7 +16,6 @@ public class User implements Serializable {
     private String interest2 = "blank";
     private String interest3 = "blank";
     private String interest4 = "blank";
-
     private String password;
 
     public int getId() {
@@ -124,7 +123,6 @@ public class User implements Serializable {
         this.name = name;
 
         this.password = password;
-        List<Integer> followers = new ArrayList<>();
-        List<Integer> following = new ArrayList<>();
+
     }
 }

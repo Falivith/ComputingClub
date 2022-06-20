@@ -47,7 +47,7 @@
             <TextField fx:id="contactField1" layoutX="76.0" layoutY="104.0" promptText="Contato 1" />
             <TextField fx:id="contactField2" layoutX="76.0" layoutY="136.0" promptText="Contato 2" />
             <TextField fx:id="websiteField" layoutX="76.0" layoutY="168.0" promptText="https://exemplo.com" />
-            <TextField fx:id="educationField" layoutX="76.0" layoutY="200.0" promptText="Profissional do sexo" />
+            <TextField fx:id="educationField" layoutX="76.0" layoutY="200.0" promptText="Alpinista" />
             <TextField fx:id="interestField1" layoutX="76.0" layoutY="233.0" promptText="Interesse 1" />
             <TextField fx:id="interestField2" layoutX="76.0" layoutY="265.0" promptText="Interesse 2" />
             <TextField fx:id="interestField3" layoutX="76.0" layoutY="297.0" promptText="Interesse 3" />
@@ -58,6 +58,8 @@
             <Button layoutX="618.0" layoutY="149.0" mnemonicParsing="false" onAction="#actionPost" text="Publicar" />
             <Label layoutX="250.0" layoutY="19.0" text="Nova publicação" />
             <Label fx:id="lblPost" layoutX="621.0" layoutY="128.0" text="Publicado" visible="false" />
+            <Label fx:id="userNotification" layoutX="531.0" layoutY="338.0" text="Salvo!" visible="false" />
+            <Button layoutX="413.0" layoutY="177.0" mnemonicParsing="false" onAction="#actionRefresh" text="Recarregar" />
          </children>
       </Pane>
    </children>

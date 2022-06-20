@@ -12,8 +12,8 @@
    <children>
       <Pane prefHeight="519.0" prefWidth="303.0">
          <children>
-            <TextField fx:id="searchField" layoutX="66.0" layoutY="33.0" prefHeight="25.0" prefWidth="223.0" promptText="Procure por um nome ou interesse" />
-            <ScrollPane layoutX="66.0" layoutY="70.0" prefHeight="290.0" prefWidth="223.0">
+            <TextField fx:id="searchField" layoutX="133.0" layoutY="33.0" prefHeight="25.0" prefWidth="156.0" promptText="Procure por um nome" />
+            <ScrollPane layoutX="66.0" layoutY="110.0" prefHeight="250.0" prefWidth="223.0">
                <content>
                   <Pane fx:id="bgSearch" prefHeight="358.0" prefWidth="199.0" style="-fx-background-color: gray;">
                      <children>
@@ -22,8 +22,10 @@
                   </Pane>
                </content>
             </ScrollPane>
-            <Button layoutX="-1.0" layoutY="33.0" mnemonicParsing="false" onAction="#actionSearch" text="Buscar" />
+            <Button layoutX="-1.0" layoutY="33.0" mnemonicParsing="false" onAction="#actionSearch" prefHeight="25.0" prefWidth="121.0" text="Buscar nome" />
             <Button layoutX="-1.0" mnemonicParsing="false" onAction="#gotoProfile" text="Voltar" />
+            <TextField layoutX="133.0" layoutY="71.0" prefHeight="25.0" prefWidth="156.0" promptText="Procure por um interesse" />
+            <Button layoutX="-1.0" layoutY="71.0" mnemonicParsing="false" onAction="#actionISearch" prefHeight="25.0" prefWidth="121.0" text="Buscar interesse" />
          </children>
       </Pane>
    </children>

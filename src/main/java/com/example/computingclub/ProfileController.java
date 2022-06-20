@@ -1,8 +1,6 @@
 package com.example.computingclub;
 
-import com.example.computingclub.userset.AdminPersistentData;
-import com.example.computingclub.userset.User;
-import com.example.computingclub.userset.UserHolder;
+import com.example.computingclub.userset.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,15 +15,10 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ProfileController implements Initializable {
 
@@ -141,7 +134,7 @@ public class ProfileController implements Initializable {
         actual.setInterest4(interestField4.getText());
 
         holder.setUser(actual);
-        userNotification.setText("Informações\nSalvas com\nSucesso");
+        userNotification.setVisible(true);
     }
 
     @Override
@@ -156,7 +149,7 @@ public class ProfileController implements Initializable {
         addressField.setText(actual.getAddress());
         contactField1.setText(actual.getEmail());
         contactField2.setText(actual.getPhone());
-        websiteField.setText(actual.getPhone());
+        websiteField.setText(actual.getWebsite());
         educationField.setText(actual.getEducation());
         interestField1.setText(actual.getInterest1());
         interestField2.setText(actual.getInterest2());
@@ -194,5 +187,11 @@ public class ProfileController implements Initializable {
         oOut.writeObject(timeline);
         oOut.close();
     }
+
+    @FXML
+    void actionRefresh(ActionEvent event) {
+
+    }
+
 
 }

@@ -15,8 +15,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -67,6 +71,9 @@ public class VisitController implements Initializable {
     @FXML
     private Label lblWebsite;
 
+    List<String> following = new ArrayList<>();
+    List<String> followers = new ArrayList<>();
+
     @FXML
     void gotoSearch(ActionEvent event) throws IOException {
         Parent search = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchScene.fxml")));
@@ -88,7 +95,7 @@ public class VisitController implements Initializable {
         lblAddress.setText(current.getAddress());
         lblContact1.setText(current.getEmail());
         lblContact2.setText(current.getPhone());
-        lblWebsite.setText(current.getPhone());
+        lblWebsite.setText(current.getWebsite());
         lblEducation.setText(current.getEducation());
         lblInterest1.setText(current.getInterest1());
         lblInterest2.setText(current.getInterest2());
@@ -99,6 +106,30 @@ public class VisitController implements Initializable {
     void loadFollows() {
         bgFolloing.setPrefHeight(followingText.getBoundsInLocal().getHeight() + 50);
         bgFollower.setPrefHeight(followerText.getBoundsInLocal().getHeight() + 50);
+    }
+
+    @FXML
+    void actionFollow(ActionEvent event) throws IOException {
+        VisitorHolder vholder = VisitorHolder.getInstance();
+        User current = vholder.getUser();
+        UserHolder uholder = UserHolder.getInstance();
+        User actual = uholder.getUser();
+
+        following.add(current.getName());
+        followers.add(actual.getName());
+
+        String file_path = "src/main/lists/" + actual.getId() + "flin.ser";
+        FileOutputStream fOut = new FileOutputStream(file_path);
+        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(following);
+        oOut.close();
+        file_path = "src/main/lists/" + current.getId() + "fler.ser";
+        fOut = new FileOutputStream(file_path);
+        oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(followers);
+        oOut.close();
+
+
     }
 
 }
