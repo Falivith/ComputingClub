@@ -53,7 +53,7 @@ public class LoginController {
                 Parent enterSuccess = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileScene.fxml")));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(enterSuccess);
-                stage.setTitle("Dashboard");
+                stage.setTitle("Editar Perfil");
                 stage.setScene(scene);
                 stage.show();
             }

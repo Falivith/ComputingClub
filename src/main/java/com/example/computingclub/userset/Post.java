@@ -1,16 +1,16 @@
 package com.example.computingclub.userset;
 
 public class Post {
-    private int id;
+    private String author;
     private String content;
     private String date;
 
-    public int getId() {
-        return id;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getContent() {
@@ -29,8 +29,8 @@ public class Post {
         this.date = date;
     }
 
-    public Post(int id, String content, String date) {
-        this.id = id;
+    public Post(String author, String content, String date) {
+        this.author = author;
         this.content = content;
         this.date = date;
     }
