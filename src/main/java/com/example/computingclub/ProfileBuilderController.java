@@ -1,6 +1,6 @@
 package com.example.computingclub;
 
-import com.example.computingclub.userset.PersistentData;
+import com.example.computingclub.userset.AdminPersistentData;
 import com.example.computingclub.userset.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -31,13 +30,19 @@ public class ProfileBuilderController {
 
     @FXML
     void btnCreate(ActionEvent event) throws IOException {
-        User newUser = new User(PersistentData.getUserCount(), newUserField.getText(), newUserPassword.getText());
+        User newUser = new User(AdminPersistentData.getUserCount(), newUserField.getText(), newUserPassword.getText());
         String file_path = "src/main/java/com/example/computingclub/userset/" + newUser.getId() + ".ser";
         FileOutputStream fOut = new FileOutputStream(file_path);
         ObjectOutputStream oOut = new ObjectOutputStream(fOut);
         oOut.writeObject(newUser);
         oOut.close();
         userNotification.setText("Usuário com ID " + newUser.getId() + " criado com Sucesso");
+
+        /*file_path = "src/main/java/com/example/computingclub/userset/accounts/userCount" + ".ser";
+        fOut = new FileOutputStream(file_path);
+        oOut = new ObjectOutputStream(fOut);
+;
+        oOut.writeObject(AdminPersistentData);*/
     }
 
     @FXML
