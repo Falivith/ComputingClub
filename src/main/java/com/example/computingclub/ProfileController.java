@@ -112,7 +112,6 @@ public class ProfileController implements Initializable {
         stage.setTitle("Busca");
         stage.setScene(scene);
         stage.show();
-
     }
 
     @FXML
@@ -178,6 +177,4 @@ public class ProfileController implements Initializable {
     void actionRefresh(ActionEvent event) {
 
     }
-
-
 }

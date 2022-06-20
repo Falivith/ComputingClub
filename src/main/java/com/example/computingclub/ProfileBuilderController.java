@@ -35,20 +35,20 @@ public class ProfileBuilderController implements Initializable {
     void btnCreate(ActionEvent event) throws IOException, ClassNotFoundException {
 
         //Check if the file exists, if not, he made it
-        File file = new File("src/main/accounts/idCount.ser");
+        File file = new File("src/main/idCount.ser");
         if (!file.exists()){
-            FileOutputStream idStream = new FileOutputStream("src/main/accounts/idCount.ser");
+            FileOutputStream idStream = new FileOutputStream("src/main/idCount.ser");
             ObjectOutputStream out = new ObjectOutputStream(idStream);
             out.writeObject(AdminPersistentData.getUserCount(false));
             out.close();
         }
 
-        FileInputStream fis = new FileInputStream("src/main/accounts/idCount.ser");
+        FileInputStream fis = new FileInputStream("src/main/idCount.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         AdminPersistentData.setUserCount((Integer)ois.readObject());
         ois.close();
 
-        File user_file = new File("src/main/accounts/" + newUserField.getText() + ".ser");
+        File user_file = new File("src/main/idCount/" + newUserField.getText() + ".ser");
         if (!user_file.exists()) {
             Post dummy = new Post("", "", "");
             ArrayList<Post> dummyarray = new ArrayList<>();
@@ -65,7 +65,7 @@ public class ProfileBuilderController implements Initializable {
             userNotification.setText("Usuário de ID " + newUser.getId() + " criado com sucesso");
 
             //Save Actual ID
-            FileOutputStream idStream = new FileOutputStream("src/main/accounts/idCount.ser");
+            FileOutputStream idStream = new FileOutputStream("src/main/idCount.ser");
             ObjectOutputStream out = new ObjectOutputStream(idStream);
             out.writeObject(AdminPersistentData.getUserCount(false));
             out.close();
@@ -86,6 +86,4 @@ public class ProfileBuilderController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
     }
-
-
 }
