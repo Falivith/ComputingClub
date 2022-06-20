@@ -1,6 +1,7 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
+import com.example.computingclub.userset.UserHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,8 +67,13 @@ public class ProfileController implements Initializable {
     private Pane bgFollower;
 
     @FXML
-    void actionLogout(ActionEvent event) {
-
+    void actionLogout(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("loginScene.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Login");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -98,6 +104,10 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        UserHolder holder = UserHolder.getInstance();
+        User actual = holder.getUser();
+
+        System.out.println(actual.getName());
         loadFollows();
     }
 

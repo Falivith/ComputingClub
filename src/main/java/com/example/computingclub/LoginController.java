@@ -1,6 +1,7 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
+import com.example.computingclub.userset.UserHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,12 +41,16 @@ public class LoginController {
             stage.show();
         }
         else{
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/com/example/computingclub/userset/accounts/" + loginField.getText() + ".ser");
+            FileInputStream fileInputStream = new FileInputStream("src/main/accounts/" + loginField.getText() + ".ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             User actual = (User) objectInputStream.readObject();
             objectInputStream.close();
             if(actual.getPassword().equals(passwordField.getText())){
-                Parent enterSuccess = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("dashScene.fxml")));
+
+                UserHolder holder = UserHolder.getInstance();
+                holder.setUser(actual);
+
+                Parent enterSuccess = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileScene.fxml")));
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 Scene scene = new Scene(enterSuccess);
                 stage.setTitle("Dashboard");
