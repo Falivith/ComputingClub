@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computingclub.ProfileController">
    <children>
       <Pane prefHeight="541.0" prefWidth="600.0">
@@ -21,18 +20,18 @@
             <Button layoutX="506.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionLogout" text="Logout" />
             <ScrollPane layoutX="335.0" layoutY="60.0" prefHeight="112.0" prefWidth="200.0">
                <content>
-                  <Pane prefHeight="122.0" prefWidth="181.0">
+                  <Pane fx:id="bgFolloing" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
                      <children>
-                        <Text fx:id="followingText" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu" wrappingWidth="166.13671875" />
+                        <Text fx:id="followingText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu" wrappingWidth="166.13671875" />
                      </children>
                   </Pane>
                </content>
             </ScrollPane>
             <ScrollPane layoutX="334.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
                <content>
-                  <Pane prefHeight="122.0" prefWidth="181.0">
+                  <Pane fx:id="bgFollower" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
                      <children>
-                        <Text fx:id="followerText" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu" wrappingWidth="166.13671875" />
+                        <Text fx:id="followerText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu" wrappingWidth="166.13671875" />
                      </children>
                   </Pane>
                </content>
@@ -53,6 +52,7 @@
             <TextField fx:id="interestField3" layoutX="76.0" layoutY="297.0" promptText="Interesse 3" />
             <Label layoutX="10.0" layoutY="237.0" text="Interesses:" />
             <TextField fx:id="interestField4" layoutX="76.0" layoutY="329.0" promptText="Interesse 4" />
+            <Button layoutX="454.0" layoutY="334.0" mnemonicParsing="false" onAction="#actionSave" text="Salvar mudanças" />
          </children>
       </Pane>
    </children>
