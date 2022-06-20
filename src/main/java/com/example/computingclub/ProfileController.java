@@ -170,15 +170,15 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void actionPost(ActionEvent event) {
+    void actionPost(ActionEvent event) throws IOException {
 
         UserHolder holder = UserHolder.getInstance();
-        User current = holder.getUser();
+        User actual = holder.getUser();
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
-        timeline.add(0, current.getName() + " - " + formatter.format(date) + "\n" + postField.getText() + "\n\n");
+        timeline.add(0, actual.getName() + " - " + formatter.format(date) + "\n" + postField.getText() + "\n\n");
 
         for (int i = 0; i >= 0; i++) {
             if (timeline.get(i) != "fim") {
@@ -187,6 +187,12 @@ public class ProfileController implements Initializable {
                 break;
             }
         }
+
+        String file_path = "src/main/posts/" + actual.getId() + ".ser";
+        FileOutputStream fOut = new FileOutputStream(file_path);
+        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(timeline);
+        oOut.close();
     }
 
 }
