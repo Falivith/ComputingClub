@@ -9,54 +9,51 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computingclub.ProfileController">
-   <children>
-      <Pane prefHeight="541.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="335.0" layoutY="34.0" text="Seguindo" />
-            <Label layoutX="335.0" layoutY="180.0" text="Seguidores" />
-            <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoDash" text="Dashboard" />
-            <Button layoutX="104.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoSearch" text="Busca" />
-            <Button layoutX="506.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionLogout" text="Logout" />
-            <ScrollPane layoutX="335.0" layoutY="60.0" prefHeight="112.0" prefWidth="200.0">
-               <content>
-                  <Pane fx:id="bgFolloing" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
-                     <children>
-                        <Text fx:id="followingText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu" wrappingWidth="166.13671875" />
-                     </children>
-                  </Pane>
-               </content>
-            </ScrollPane>
-            <ScrollPane layoutX="334.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
-               <content>
-                  <Pane fx:id="bgFollower" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
-                     <children>
-                        <Text fx:id="followerText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="6.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu" wrappingWidth="166.13671875" />
-                     </children>
-                  </Pane>
-               </content>
-            </ScrollPane>
-            <Label layoutX="31.0" layoutY="43.0" prefHeight="17.0" prefWidth="38.0" text="Nome:" />
-            <Label layoutX="14.0" layoutY="76.0" prefHeight="17.0" prefWidth="55.0" text="Endereço:" />
-            <Label layoutX="15.0" layoutY="108.0" text="Contatos:" />
-            <Label layoutX="20.0" layoutY="172.0" prefHeight="17.0" prefWidth="50.0" text="Website:" />
-            <Label layoutX="10.0" layoutY="204.0" text="Formação:" />
-            <TextField fx:id="addressField" layoutX="76.0" layoutY="72.0" promptText="Rua do Vale das Gay" />
-            <TextField fx:id="nameField" layoutX="76.0" layoutY="39.0" promptText="Nome Sobrenome" />
-            <TextField fx:id="contactField1" layoutX="76.0" layoutY="104.0" promptText="Contato 1" />
-            <TextField fx:id="contactField2" layoutX="76.0" layoutY="136.0" promptText="Contato 2" />
-            <TextField fx:id="websiteField" layoutX="76.0" layoutY="168.0" promptText="https://exemplo.com" />
-            <TextField fx:id="educationField" layoutX="76.0" layoutY="200.0" promptText="Profissional do sexo" />
-            <TextField fx:id="interestField1" layoutX="76.0" layoutY="233.0" promptText="Interesse 1" />
-            <TextField fx:id="interestField2" layoutX="76.0" layoutY="265.0" promptText="Interesse 2" />
-            <TextField fx:id="interestField3" layoutX="76.0" layoutY="297.0" promptText="Interesse 3" />
-            <Label layoutX="10.0" layoutY="237.0" text="Interesses:" />
-            <TextField fx:id="interestField4" layoutX="76.0" layoutY="329.0" promptText="Interesse 4" />
-            <Button layoutX="454.0" layoutY="334.0" mnemonicParsing="false" onAction="#actionSave" text="Salvar mudanças" />
-         </children>
-      </Pane>
-   </children>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+      prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.computingclub.ProfileController">
    <padding>
-      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
    </padding>
+   <Pane prefHeight="541.0" prefWidth="600.0">
+      <Label layoutX="335.0" layoutY="34.0" text="Seguindo"/>
+      <Label layoutX="335.0" layoutY="180.0" text="Seguidores"/>
+      <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoDash" text="Dashboard"/>
+      <Button layoutX="104.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoSearch" text="Busca"/>
+      <Button layoutX="506.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionLogout" text="Logout"/>
+      <ScrollPane layoutX="335.0" layoutY="60.0" prefHeight="112.0" prefWidth="200.0">
+         <Pane fx:id="bgFolloing" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
+            <Text fx:id="followingText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="6.0" layoutY="19.0"
+                  strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu"
+                  wrappingWidth="166.13671875"/>
+         </Pane>
+      </ScrollPane>
+      <ScrollPane layoutX="334.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
+         <Pane fx:id="bgFollower" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
+            <Text fx:id="followerText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="6.0" layoutY="19.0"
+                  strokeType="OUTSIDE" strokeWidth="0.0"
+                  text="Dedo, língua, cu e buceta &#10;Dedo, buceta, língua e cu&#10;Dedo na língua, língua no dedo&#10;Cu na buceta, buceta no cu&#10;Dedo na buceta, língua no cu&#10;Língua na buceta, dedo no cu&#10;Dedo, língua, cu. Buceta também&#10;Buceta vezes dedos, noves fora cu&#10;Língua, língua. Dedo no cu&#10;Dedo na buceta, língua no cu&#10;Dedo, língua, cu e buceta&#10;Dedo, buceta, língua e cu"
+                  wrappingWidth="166.13671875"/>
+         </Pane>
+      </ScrollPane>
+      <Label layoutX="31.0" layoutY="43.0" prefHeight="17.0" prefWidth="38.0" text="Nome:"/>
+      <Label layoutX="14.0" layoutY="76.0" prefHeight="17.0" prefWidth="55.0" text="Endereço:"/>
+      <Label layoutX="15.0" layoutY="108.0" text="Contatos:"/>
+      <Label layoutX="20.0" layoutY="172.0" prefHeight="17.0" prefWidth="50.0" text="Website:"/>
+      <Label layoutX="10.0" layoutY="204.0" text="Formação:"/>
+      <TextField fx:id="addressField" layoutX="76.0" layoutY="72.0" promptText="Rua do Vale das Gay"/>
+      <TextField fx:id="nameField" editable="false" layoutX="76.0" layoutY="39.0" promptText="Nome Sobrenome"/>
+      <TextField fx:id="contactField1" layoutX="76.0" layoutY="104.0" promptText="Contato 1"/>
+      <TextField fx:id="contactField2" layoutX="76.0" layoutY="136.0" promptText="Contato 2"/>
+      <TextField fx:id="websiteField" layoutX="76.0" layoutY="168.0" promptText="https://exemplo.com"/>
+      <TextField fx:id="educationField" layoutX="76.0" layoutY="200.0" promptText="Profissional do sexo"/>
+      <TextField fx:id="interestField1" layoutX="76.0" layoutY="233.0" promptText="Interesse 1"/>
+      <TextField fx:id="interestField2" layoutX="76.0" layoutY="265.0" promptText="Interesse 2"/>
+      <TextField fx:id="interestField3" layoutX="76.0" layoutY="297.0" promptText="Interesse 3"/>
+      <Label layoutX="10.0" layoutY="237.0" text="Interesses:"/>
+      <TextField fx:id="interestField4" layoutX="76.0" layoutY="329.0" promptText="Interesse 4"/>
+      <Button layoutX="454.0" layoutY="334.0" mnemonicParsing="false" onAction="#actionSave" text="Salvar mudanças"/>
+      <Label fx:id="userNotification" layoutX="259.0" layoutY="26.0" textAlignment="CENTER"/>
+   </Pane>
 </VBox>
