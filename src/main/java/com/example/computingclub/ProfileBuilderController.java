@@ -33,21 +33,21 @@ public class ProfileBuilderController implements Initializable {
     void btnCreate(ActionEvent event) throws IOException, ClassNotFoundException {
 
         //Check if the file exists, if not, he made it
-        File file = new File("src/main/accounts/idCount.ser");
+        File file = new File("src/main/java/com/example/computingclub/userset/accounts/idCount.ser");
         if (!file.exists()){
-            FileOutputStream idStream = new FileOutputStream("src/main/accounts/idCount.ser");
+            FileOutputStream idStream = new FileOutputStream("src/main/java/com/example/computingclub/userset/accounts/idCount.ser");
             ObjectOutputStream out = new ObjectOutputStream(idStream);
             out.writeObject(AdminPersistentData.getUserCount(false));
             out.close();
         }
 
-        FileInputStream fis = new FileInputStream("src/main/accounts/idCount.ser");
+        FileInputStream fis = new FileInputStream("src/main/java/com/example/computingclub/userset/accounts/idCount.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         AdminPersistentData.setUserCount((Integer) ois.readObject());
         ois.close();
 
         User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText());
-        String file_path = "src/main/accounts/" + newUser.getName() + ".ser";
+        String file_path = "src/main/java/com/example/computingclub/userset/accounts/" + newUser.getName() + ".ser";
         FileOutputStream fOut = new FileOutputStream(file_path);
         ObjectOutputStream oOut = new ObjectOutputStream(fOut);
         oOut.writeObject(newUser);
@@ -55,7 +55,7 @@ public class ProfileBuilderController implements Initializable {
         userNotification.setText("Usuário com ID " + newUser.getId() + " criado com Sucesso");
 
         //Save Actual ID
-        FileOutputStream idStream = new FileOutputStream("src/main/accounts/idCount.ser");
+        FileOutputStream idStream = new FileOutputStream("src/main/java/com/example/computingclub/userset/accounts/idCount.ser");
         ObjectOutputStream out = new ObjectOutputStream(idStream);
         out.writeObject(AdminPersistentData.getUserCount(false));
         out.close();
