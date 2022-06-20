@@ -43,7 +43,7 @@ public class ProfileBuilderController implements Initializable {
 
         FileInputStream fis = new FileInputStream("src/main/accounts/idCount.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
-        AdminPersistentData.setUserCount((Integer) ois.readObject());
+        AdminPersistentData.setUserCount((Integer)ois.readObject());
         ois.close();
 
         User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText());
