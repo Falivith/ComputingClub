@@ -56,7 +56,6 @@ public class ProfileBuilderController implements Initializable {
 
             User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText(), dummyarray);
 
-
             String file_path = "src/main/accounts/" + newUser.getName() + ".ser";
             FileOutputStream fOut = new FileOutputStream(file_path);
             ObjectOutputStream oOut = new ObjectOutputStream(fOut);
