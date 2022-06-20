@@ -1,5 +1,7 @@
 package com.example.computingclub;
 
+import com.example.computingclub.userset.Post;
+import com.example.computingclub.userset.Timeline;
 import com.example.computingclub.userset.User;
 import com.example.computingclub.userset.UserHolder;
 import javafx.event.ActionEvent;
@@ -9,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -16,8 +19,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ProfileController implements Initializable {
 
@@ -67,11 +70,16 @@ public class ProfileController implements Initializable {
     private Pane bgFollower;
 
     @FXML
+    private TextArea postField;
+
+    ArrayList<String> timeline = new ArrayList<>();
+
+    @FXML
     void actionLogout(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("loginScene.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Parent login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginScene.fxml")));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(login);
         stage.setTitle("Login");
-        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
@@ -104,16 +112,33 @@ public class ProfileController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserHolder holder = UserHolder.getInstance();
-        User actual = holder.getUser();
-
-        System.out.println(actual.getName());
         loadFollows();
+        timeline.add("fim");
     }
 
     void loadFollows() {
         bgFolloing.setPrefHeight(followingText.getBoundsInLocal().getHeight() + 50);
         bgFollower.setPrefHeight(followerText.getBoundsInLocal().getHeight() + 50);
+    }
+
+    @FXML
+    void actionPost(ActionEvent event) {
+
+        UserHolder holder = UserHolder.getInstance();
+        User current = holder.getUser();
+
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+        timeline.add(0, current.getName() + " - " + formatter.format(date) + "\n" + postField.getText() + "\n\n");
+
+        for (int i = 0; i >= 0; i++) {
+            if (timeline.get(i) != "fim") {
+                System.out.println(timeline.get(i));
+            }else {
+                break;
+            }
+        }
     }
 
 }

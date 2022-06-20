@@ -4,21 +4,22 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computingclub.ProfileController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="715.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computingclub.ProfileController">
    <children>
       <Pane prefHeight="541.0" prefWidth="600.0">
          <children>
-            <Label layoutX="335.0" layoutY="34.0" text="Seguindo" />
-            <Label layoutX="335.0" layoutY="180.0" text="Seguidores" />
+            <Label layoutX="312.0" layoutY="181.0" text="Seguindo" />
+            <Label layoutX="539.0" layoutY="181.0" text="Seguidores" />
             <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoDash" text="Dashboard" />
             <Button layoutX="104.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoSearch" text="Busca" />
-            <Button layoutX="506.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionLogout" text="Logout" />
-            <ScrollPane layoutX="335.0" layoutY="60.0" prefHeight="112.0" prefWidth="200.0">
+            <Button layoutX="621.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionLogout" text="Logout" />
+            <ScrollPane layoutX="250.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
                <content>
                   <Pane fx:id="bgFolloing" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
                      <children>
@@ -27,7 +28,7 @@
                   </Pane>
                </content>
             </ScrollPane>
-            <ScrollPane layoutX="334.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
+            <ScrollPane layoutX="469.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
                <content>
                   <Pane fx:id="bgFollower" prefHeight="122.0" prefWidth="181.0" style="-fx-background-color: gray;">
                      <children>
@@ -52,7 +53,11 @@
             <TextField fx:id="interestField3" layoutX="76.0" layoutY="297.0" promptText="Interesse 3" />
             <Label layoutX="10.0" layoutY="237.0" text="Interesses:" />
             <TextField fx:id="interestField4" layoutX="76.0" layoutY="329.0" promptText="Interesse 4" />
-            <Button layoutX="454.0" layoutY="334.0" mnemonicParsing="false" onAction="#actionSave" text="Salvar mudanças" />
+            <Button layoutX="569.0" layoutY="334.0" mnemonicParsing="false" onAction="#actionSave" text="Salvar mudanças" />
+            <TextArea fx:id="postField" layoutX="250.0" layoutY="40.0" prefHeight="131.0" prefWidth="359.0" promptText="O que deseja compartilhar?" />
+            <Button layoutX="618.0" layoutY="149.0" mnemonicParsing="false" onAction="#actionPost" text="Publicar" />
+            <Label layoutX="250.0" layoutY="19.0" text="Nova publicação" />
+            <Label fx:id="lblPost" layoutX="621.0" layoutY="128.0" text="Publicado" visible="false" />
          </children>
       </Pane>
    </children>

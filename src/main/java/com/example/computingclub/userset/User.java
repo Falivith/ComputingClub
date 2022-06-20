@@ -2,6 +2,7 @@ package com.example.computingclub.userset;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User implements Serializable {
     private int id;
@@ -123,7 +124,7 @@ public class User implements Serializable {
         this.name = name;
 
         this.password = password;
-        ArrayList<Integer> followers = new ArrayList<>();
-        ArrayList<Integer> following = new ArrayList<>();
+        List<Integer> followers = new ArrayList<>();
+        List<Integer> following = new ArrayList<>();
     }
 }
