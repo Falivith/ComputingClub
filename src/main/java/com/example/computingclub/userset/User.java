@@ -123,6 +123,5 @@ public class User implements Serializable {
         this.name = name;
 
         this.password = password;
-
     }
 }

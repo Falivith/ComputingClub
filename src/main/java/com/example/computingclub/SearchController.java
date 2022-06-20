@@ -1,8 +1,9 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
-import com.example.computingclub.userset.UserHolder;
 import com.example.computingclub.userset.VisitorHolder;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,22 +11,26 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable {
 
-    private Stage stage;
-    private Scene scene;
+    @FXML
+    private ListView<String> listViewUsers;
+    private final List<String> users = new ArrayList<>();
 
     @FXML
     private Pane bgSearch;
@@ -54,14 +59,13 @@ public class SearchController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }
-
     }
 
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
         Parent profile = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileScene.fxml")));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(profile);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(profile);
         stage.setTitle("Perfil");
         stage.setScene(scene);
         stage.show();
@@ -69,16 +73,20 @@ public class SearchController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPosts();
+        loadUsers();
     }
 
-    void loadPosts() {
-        bgSearch.setPrefHeight(searchText.getBoundsInLocal().getHeight() + 50);
+    void loadUsers(){
+        File file = new File("src/main/accounts/");
+        File[] arquivos = file.listFiles();
+        try {
+            for (File arquivo : arquivos) {
+                users.add((arquivo.getName().replace(".ser", "")));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        ObservableList<String> obsUsers = FXCollections.observableArrayList(users);
+        listViewUsers.setItems(obsUsers);
     }
-
-    @FXML
-    void actionISearch(ActionEvent event) {
-
-    }
-
 }
