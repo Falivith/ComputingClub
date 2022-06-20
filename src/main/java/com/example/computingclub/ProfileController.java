@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -20,6 +21,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -72,6 +76,12 @@ public class ProfileController implements Initializable {
 
     @FXML
     private Label userNotification;
+
+    @FXML
+    private TextArea postField;
+
+    ArrayList<String> timeline = new ArrayList<>();
+
 
     @FXML
     void actionLogout(ActionEvent event) throws IOException {
@@ -137,6 +147,7 @@ public class ProfileController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadFollows();
+        timeline.add("fim");
 
         UserHolder holder = UserHolder.getInstance();
         User actual = holder.getUser();
@@ -156,6 +167,26 @@ public class ProfileController implements Initializable {
     void loadFollows() {
         bgFolloing.setPrefHeight(followingText.getBoundsInLocal().getHeight() + 50);
         bgFollower.setPrefHeight(followerText.getBoundsInLocal().getHeight() + 50);
+    }
+
+    @FXML
+    void actionPost(ActionEvent event) {
+
+        UserHolder holder = UserHolder.getInstance();
+        User current = holder.getUser();
+
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+        timeline.add(0, current.getName() + " - " + formatter.format(date) + "\n" + postField.getText() + "\n\n");
+
+        for (int i = 0; i >= 0; i++) {
+            if (timeline.get(i) != "fim") {
+                System.out.println(timeline.get(i));
+            }else {
+                break;
+            }
+        }
     }
 
 }
