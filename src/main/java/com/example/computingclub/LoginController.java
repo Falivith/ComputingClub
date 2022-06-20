@@ -40,7 +40,7 @@ public class LoginController {
             stage.show();
         }
         else{
-            FileInputStream fileInputStream = new FileInputStream("src/main/java/com/example/computingclub/userset/accounts/" + loginField.getText() + ".ser");
+            FileInputStream fileInputStream = new FileInputStream("src/main/accounts/" + loginField.getText() + ".ser");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             User actual = (User) objectInputStream.readObject();
             objectInputStream.close();
