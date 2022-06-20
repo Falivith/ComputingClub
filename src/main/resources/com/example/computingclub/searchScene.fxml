@@ -17,7 +17,7 @@
                <content>
                   <Pane fx:id="bgSearch" prefHeight="358.0" prefWidth="199.0" style="-fx-background-color: gray;">
                      <children>
-                        <Text fx:id="searchText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="12.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="... an A press actually has 3 parts to it: when A is pressed, when A is held, and when A is released, and together this forms one complete A press. Now usually it's the pressing that's useful because that's the only part that makes Mario jump, however sometimes it's sufficient to just use the holding part which allows Mario to do little kicks, to swim in water, to fall slowly while twirling, and to fall slowly with the wing cap, and as for the release, well... there's currently no cases where that's useful or important so don't worry about that part. Now if we map out the required A presses for wing Mario over the rainbow..." wrappingWidth="174.13671875" />
+                        <Text fx:id="searchText" boundsType="LOGICAL_VERTICAL_CENTER" layoutX="12.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." wrappingWidth="174.13671875" />
                      </children>
                   </Pane>
                </content>
