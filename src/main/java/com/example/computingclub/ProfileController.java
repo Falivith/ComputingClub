@@ -73,8 +73,6 @@ public class ProfileController implements Initializable {
     @FXML
     private TextArea postField;
 
-    ArrayList<Post> timeline = new ArrayList<>();
-
 
     @FXML
     void actionLogout(ActionEvent event) throws IOException {
@@ -162,7 +160,7 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void actionPost(ActionEvent event) throws IOException {
+    void actionPost(ActionEvent event) {
 
         UserHolder holder = UserHolder.getInstance();
         User actual = holder.getUser();
@@ -171,19 +169,9 @@ public class ProfileController implements Initializable {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
         Post post = new Post(actual.getName(), "\n" + postField.getText() + "\n\n", " - " + formatter.format(date));
-        timeline.add(0, post);
+        actual.getPosts().add(0, post);
 
-        for (Post pos : timeline) {
-            if (pos.getAuthor().equals("aa")) {
-                System.out.println(pos.getAuthor() + pos.getDate() + pos.getContent());
-            }
-        }
-
-        String file_path = "src/main/posts/timeline.ser";
-        FileOutputStream fOut = new FileOutputStream(file_path);
-        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
-        oOut.writeObject(timeline);
-        oOut.close();
+        holder.setUser(actual);
     }
 
     @FXML

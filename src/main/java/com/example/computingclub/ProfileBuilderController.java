@@ -1,6 +1,7 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.AdminPersistentData;
+import com.example.computingclub.userset.Post;
 import com.example.computingclub.userset.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -48,7 +50,13 @@ public class ProfileBuilderController implements Initializable {
 
         File user_file = new File("src/main/accounts/" + newUserField.getText() + ".ser");
         if (!user_file.exists()) {
-            User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText());
+            Post dummy = new Post("", "", "");
+            ArrayList<Post> dummyarray = new ArrayList<>();
+            dummyarray.add(dummy);
+
+            User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText(), dummyarray);
+
+
             String file_path = "src/main/accounts/" + newUser.getName() + ".ser";
             FileOutputStream fOut = new FileOutputStream(file_path);
             ObjectOutputStream oOut = new ObjectOutputStream(fOut);

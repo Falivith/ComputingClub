@@ -2,6 +2,7 @@ package com.example.computingclub;
 
 import com.example.computingclub.userset.Post;
 import com.example.computingclub.userset.User;
+import com.example.computingclub.userset.UserHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,14 +10,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectStreamException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -42,11 +41,16 @@ public class DashController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPosts();
-    }
+        UserHolder holder = UserHolder.getInstance();
+        User actual = holder.getUser();
 
+        String dashholder = "";
 
-    void loadPosts() {
+        for (Post pos : actual.getPosts()) {
+            dashholder = dashholder + pos.getAuthor() + pos.getDate() + pos.getContent();
+        }
+        dashText.setText(dashholder);
+
         bgDash.setPrefHeight(dashText.getBoundsInLocal().getHeight() + 50);
     }
 

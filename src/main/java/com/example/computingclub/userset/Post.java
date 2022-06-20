@@ -3,6 +3,7 @@ package com.example.computingclub.userset;
 import java.io.Serializable;
 
 public class Post implements Serializable {
+
     private String author;
     private String content;
     private String date;
