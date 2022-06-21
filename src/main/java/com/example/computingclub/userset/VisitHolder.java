@@ -1,7 +1,6 @@
 package com.example.computingclub.userset;
 
 public final class VisitHolder {
-
     private User user;
     private final static VisitHolder INSTANCE = new VisitHolder();
 

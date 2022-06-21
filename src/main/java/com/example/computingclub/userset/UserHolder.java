@@ -1,7 +1,6 @@
 package com.example.computingclub.userset;
 
 public final class UserHolder {
-
     private User user;
     private final static UserHolder INSTANCE = new UserHolder();
 

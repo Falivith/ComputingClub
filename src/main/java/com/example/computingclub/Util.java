@@ -12,7 +12,6 @@ import java.io.*;
 import java.util.Objects;
 
 public final class Util {
-
     public static void changeScreen(ActionEvent event, String fxml, String header) throws IOException {
         Parent nextScene = FXMLLoader.load(Objects.requireNonNull(Util.class.getResource(fxml)));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

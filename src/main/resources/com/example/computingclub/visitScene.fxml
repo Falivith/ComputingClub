@@ -32,7 +32,7 @@
             <Label fx:id="lblInterest2" layoutX="311.0" layoutY="108.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblInterest3" layoutX="311.0" layoutY="141.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblInterest4" layoutX="311.0" layoutY="173.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Button fx:id="btnFollow" layoutX="500.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionFollow" text="Seguir" />
+            <Button fx:id="btnFollow" layoutX="670.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionFollow" prefHeight="25.0" prefWidth="110.0" text="Seguir" />
             <ListView fx:id="listFollowers" layoutX="270.0" layoutY="247.0" prefHeight="145.0" prefWidth="200.0" />
             <ListView fx:id="listFollowing" layoutX="25.0" layoutY="247.0" prefHeight="145.0" prefWidth="200.0" />
             <ScrollPane layoutX="500.0" layoutY="47.0" prefHeight="345.0" prefWidth="280.0">

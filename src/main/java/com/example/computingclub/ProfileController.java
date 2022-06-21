@@ -5,16 +5,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.net.URL;
@@ -59,7 +54,6 @@ public class ProfileController implements Initializable {
 
     @FXML
     void actionLogout(ActionEvent event) throws IOException {
-
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
 
@@ -69,9 +63,7 @@ public class ProfileController implements Initializable {
 
     @FXML
     void gotoDash(ActionEvent event) throws IOException, ClassNotFoundException{
-
         User timeline = loadUser("src/main/admin/admin.ser");
-
         // repurpose of visit into a timeline using admin
         VisitHolder visHolder = VisitHolder.getInstance();
         visHolder.setUser(timeline);
@@ -81,6 +73,11 @@ public class ProfileController implements Initializable {
 
     @FXML
     void gotoSearch(ActionEvent event) throws IOException {
+        UserHolder usrHolder = UserHolder.getInstance();
+        User currentUsr = usrHolder.getUser();
+
+        saveUser(currentUsr, "src/main/accounts/" + currentUsr.getName() + ".ser");
+
         changeScreen(event, "searchScene.fxml", "Busca");
     }
 
@@ -88,7 +85,7 @@ public class ProfileController implements Initializable {
     void actionSave(ActionEvent event) throws IOException {
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
-
+        // saves all changes into user
         currentUsr.setName(lblName.getText());
         currentUsr.setAddress(addressField.getText());
         currentUsr.setContact1(contactField1.getText());
@@ -111,7 +108,7 @@ public class ProfileController implements Initializable {
 
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
-
+        // loads and displays user info
         lblName.setText(currentUsr.getName());
         addressField.setText(currentUsr.getAddress());
         contactField1.setText(currentUsr.getContact1());
@@ -122,6 +119,31 @@ public class ProfileController implements Initializable {
         interestField2.setText(currentUsr.getInterest2());
         interestField3.setText(currentUsr.getInterest3());
         interestField4.setText(currentUsr.getInterest4());
+    }
+
+    @FXML
+    void actionPost(ActionEvent event) throws IOException, ClassNotFoundException {
+        if (postField.getText() != null && !postField.getText().trim().isEmpty()) {
+            UserHolder usrHolder = UserHolder.getInstance();
+            User currentUsr = usrHolder.getUser();
+
+            User timeline = loadUser("src/main/admin/admin.ser");
+
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+
+            Post post = new Post(currentUsr.getName(), "\n" + postField.getText() + "\n\n= = = = = = = = = = = = = = = = = = = =\n\n", " - " + formatter.format(date));
+            currentUsr.getPosts().add(0, post);
+            timeline.getPosts().add(0, post);
+
+            usrHolder.setUser(currentUsr);
+            saveUser(timeline, "src/main/admin/admin.ser");
+
+            lblPost.setVisible(true);
+            postField.setText("");
+        }else {
+            lblPost.setVisible(false);
+        }
     }
 
     void loadFollows() {
@@ -159,27 +181,5 @@ public class ProfileController implements Initializable {
         listFollowers.setItems(obsUsers);
 
         users.clear();
-    }
-
-    @FXML
-    void actionPost(ActionEvent event) throws IOException, ClassNotFoundException {
-        UserHolder usrHolder = UserHolder.getInstance();
-        User currentUsr = usrHolder.getUser();
-
-        User timeline = loadUser("src/main/admin/admin.ser");
-
-        Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-
-        Post post = new Post(currentUsr.getName(), "\n" + postField.getText() + "\n\n= = = = = = = = = = = = = = = = = = = =\n\n", " - " + formatter.format(date));
-        currentUsr.getPosts().add(0, post);
-        timeline.getPosts().add(0, post);
-
-        usrHolder.setUser(currentUsr);
-
-        saveUser(timeline, "src/main/admin/admin.ser");
-
-        lblPost.setVisible(true);
-        postField.setText("");
     }
 }

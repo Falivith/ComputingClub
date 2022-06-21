@@ -19,6 +19,7 @@
          <TextField fx:id="loginField" layoutX="65.0" layoutY="50.0" promptText="Nome" />
          <PasswordField fx:id="passwordField" layoutX="65.0" layoutY="80.0" promptText="*****" />
           <Button layoutX="170.0" layoutY="115.0" onAction="#btnLoginAction" text="Login" />
+         <Label fx:id="lblUserNotification" alignment="CENTER" layoutX="43.0" layoutY="14.0" prefHeight="17.0" prefWidth="149.0" textAlignment="CENTER" />
       </children>
    </Pane>
 </VBox>

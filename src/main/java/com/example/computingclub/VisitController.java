@@ -26,7 +26,6 @@ import static com.example.computingclub.Util.changeScreen;
 import static com.example.computingclub.Util.saveUser;
 
 public class VisitController implements Initializable {
-
     @FXML
     private Label lblAddress;
     @FXML
@@ -58,9 +57,6 @@ public class VisitController implements Initializable {
     @FXML
     private Text dashText;
 
-    public VisitController() {
-    }
-
     //
 
     @FXML
@@ -70,10 +66,10 @@ public class VisitController implements Initializable {
         VisitHolder visHolder = VisitHolder.getInstance();
         User currentVis = visHolder.getUser();
 
-        changeScreen(event, "searchScene.fxml", "Busca");
-
         saveUser(currentVis, "src/main/accounts/" + currentVis.getName() + ".ser");
         saveUser(currentUsr, "src/main/accounts/" + currentUsr.getName() + ".ser");
+
+        changeScreen(event, "searchScene.fxml", "Busca");
     }
 
     @FXML
@@ -82,7 +78,7 @@ public class VisitController implements Initializable {
         User currentUsr = usrHolder.getUser();
         VisitHolder visHolder = VisitHolder.getInstance();
         User currentVis = visHolder.getUser();
-
+        // updates both profiles follow/er list
         if (!currentVis.getFollowers().contains(currentUsr.getName())) {
             currentVis.getFollowers().add(currentUsr.getName());
             currentUsr.getFollowing().add(currentVis.getName());
@@ -103,7 +99,7 @@ public class VisitController implements Initializable {
 
         VisitHolder visHolder = VisitHolder.getInstance();
         User currentVis = visHolder.getUser();
-
+        // loads and displays profile's info
         lblName.setText(currentVis.getName());
         lblAddress.setText(currentVis.getAddress());
         lblContact1.setText(currentVis.getContact1());
@@ -114,7 +110,7 @@ public class VisitController implements Initializable {
         lblInterest2.setText(currentVis.getInterest2());
         lblInterest3.setText(currentVis.getInterest3());
         lblInterest4.setText(currentVis.getInterest4());
-
+        // display all the user's posts
         String dashHolder = "= = = = = = = = = = = = = = = = = = = =\n\n";
 
         for (Post pos : currentVis.getPosts()) {
