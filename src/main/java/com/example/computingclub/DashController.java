@@ -3,6 +3,7 @@ package com.example.computingclub;
 import com.example.computingclub.userset.Post;
 import com.example.computingclub.userset.User;
 import com.example.computingclub.userset.UserHolder;
+import com.example.computingclub.userset.VisitorHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -41,13 +42,17 @@ public class DashController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserHolder holder = UserHolder.getInstance();
-        User actual = holder.getUser();
+        UserHolder uholder = UserHolder.getInstance();
+        User actualu = uholder.getUser();
+        VisitorHolder vholder = VisitorHolder.getInstance();
+        User actualv = vholder.getUser();
 
         String dashholder = "";
 
-        for (Post pos : actual.getPosts()) {
-            dashholder = dashholder + pos.getAuthor() + pos.getDate() + pos.getContent();
+        for (Post pos : actualv.getPosts()) {
+            if (actualu.getFollowing().contains(pos.getAuthor())) {
+                dashholder = dashholder + pos.getAuthor() + pos.getDate() + pos.getContent();
+            }
         }
         dashText.setText(dashholder);
 

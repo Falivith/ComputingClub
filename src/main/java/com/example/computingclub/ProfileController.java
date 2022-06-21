@@ -95,7 +95,15 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void gotoDash(ActionEvent event) throws IOException {
+    void gotoDash(ActionEvent event) throws IOException, ClassNotFoundException{
+        FileInputStream fileInputStream = new FileInputStream("src/main/idcount/dummy.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        User current = (User) objectInputStream.readObject();
+        objectInputStream.close();
+
+        VisitorHolder holder = VisitorHolder.getInstance();
+        holder.setUser(current);
+
         Parent dashboard = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("dashScene.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(dashboard);
@@ -115,7 +123,7 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void actionSave(ActionEvent event) {
+    void actionSave(ActionEvent event) throws IOException {
         UserHolder holder = UserHolder.getInstance();
         User actual = holder.getUser();
 
@@ -130,7 +138,12 @@ public class ProfileController implements Initializable {
         actual.setInterest3(interestField3.getText());
         actual.setInterest4(interestField4.getText());
 
-        holder.setUser(actual);
+        String file_path = "src/main/accounts/" + actual.getName() + ".ser";
+        FileOutputStream fOut = new FileOutputStream(file_path);
+        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(actual);
+        oOut.close();
+
         userNotification.setVisible(true);
     }
 
@@ -176,22 +189,30 @@ public class ProfileController implements Initializable {
     }
 
     @FXML
-    void actionPost(ActionEvent event) {
+    void actionPost(ActionEvent event) throws IOException, ClassNotFoundException {
 
         UserHolder holder = UserHolder.getInstance();
         User actual = holder.getUser();
+
+        FileInputStream fileInputStream = new FileInputStream("src/main/idcount/dummy.ser");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        User timeline = (User) objectInputStream.readObject();
+        objectInputStream.close();
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
 
         Post post = new Post(actual.getName(), "\n" + postField.getText() + "\n\n", " - " + formatter.format(date));
         actual.getPosts().add(0, post);
+        timeline.getPosts().add(0, post);
 
         holder.setUser(actual);
+
+        String file_path = "src/main/idcount/dummy.ser";
+        FileOutputStream fOut = new FileOutputStream(file_path);
+        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(timeline);
+        oOut.close();
     }
 
-    @FXML
-    void actionRefresh(ActionEvent event) {
-
-    }
 }
