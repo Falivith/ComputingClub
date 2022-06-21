@@ -38,13 +38,18 @@ public class SearchController implements Initializable {
     @FXML
     void actionSearch(ActionEvent event) throws IOException, ClassNotFoundException{
 
-        User current = loadUser("src/main/accounts/" + searchField.getText() + ".ser");
+        String path = "src/main/accounts/" + searchField.getText() + ".ser";
+        File user_file = new File(path);
 
-        // load searched name's user into visitor
-        VisitHolder visHolder = VisitHolder.getInstance();
-        visHolder.setUser(current);
+        if (user_file.exists()) {
+            User current = loadUser("src/main/accounts/" + searchField.getText() + ".ser");
 
-        changeScreen(event, "visitScene.fxml", "Perfil de " + current.getName());
+            // load searched name's user into visitor
+            VisitHolder visHolder = VisitHolder.getInstance();
+            visHolder.setUser(current);
+
+            changeScreen(event, "visitScene.fxml", "Perfil de " + current.getName());
+        }
     }
 
     @FXML

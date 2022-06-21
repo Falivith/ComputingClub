@@ -20,10 +20,13 @@ public class LoginController {
 
     @FXML
     void btnLoginAction(ActionEvent event) throws IOException, ClassNotFoundException {
+
+        String path;
+
         if (loginField.getText().equals("admin") && passwordField.getText().equals("UFP31")) {
 
-            String path = "src/main/admin/admin.ser";
-            File user_file = new File(path);
+            path = "src/main/admin/admin.ser";
+            File user_file = new File("src/main/admin/admin.ser");
 
             // Create admin File if he doesn't exist
 
@@ -40,11 +43,16 @@ public class LoginController {
             changeScreen(event, "profileBuilderScene.fxml", "ADMIN - Criação de Perfis");
         }
         else{
-            User currentUsr = loadUser("src/main/accounts/" + loginField.getText() + ".ser");
-            UserHolder usrHolder = UserHolder.getInstance();
-            usrHolder.setUser(currentUsr);
-            if (currentUsr.getPassword().equals(passwordField.getText())) {
-                changeScreen(event, "profileScene.fxml", "Perfil");
+            path = "src/main/accounts/" + loginField.getText() + ".ser";
+            File user_file = new File(path);
+            if (user_file.exists()) {
+                User currentUsr = loadUser(path);
+                UserHolder usrHolder = UserHolder.getInstance();
+                usrHolder.setUser(currentUsr);
+
+                if (currentUsr.getPassword().equals(passwordField.getText())) {
+                    changeScreen(event, "profileScene.fxml", "Perfil");
+                }
             }
         }
     }
