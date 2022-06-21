@@ -1,6 +1,7 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
+import com.example.computingclub.userset.UserHolder;
 import com.example.computingclub.userset.VisitHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +28,8 @@ public class SearchController implements Initializable {
     @FXML
     private TextField searchField;
     @FXML
+    private TextField interestField;
+    @FXML
     private Label lblUserNotification;
 
     //
@@ -46,6 +49,32 @@ public class SearchController implements Initializable {
         }else {
             lblUserNotification.setText("Usuário não existe");
         }
+    }
+
+    @FXML
+    void actionFilter(ActionEvent event) {
+        final List<String> users = new ArrayList<>();
+
+        File file = new File("src/main/accounts/");
+        File[] usrFile = file.listFiles();
+        try {
+            for (File fl : usrFile) {
+
+                User test = loadUser("src/main/accounts/" + fl.getName());
+
+                if (interestField.getText().equals(test.getInterest1()) ||
+                    interestField.getText().equals(test.getInterest2()) ||
+                    interestField.getText().equals(test.getInterest3()) ||
+                    interestField.getText().equals(test.getInterest4())) {
+                    users.add((fl.getName().replace(".ser", "")));
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        ObservableList<String> obsUsers = FXCollections.observableArrayList(users);
+        listViewUsers.setItems(obsUsers);
+        users.clear();
     }
 
     @FXML

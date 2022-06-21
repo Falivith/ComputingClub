@@ -43,7 +43,7 @@ public class LoginController {
                 saveUser(admin, path);
             }
             changeScreen(event, "profileBuilderScene.fxml", "ADMIN - Criação");
-        }else {
+        }else if (!loginField.getText().equals("admin")){
             path = "src/main/accounts/" + loginField.getText() + ".ser";
             File user_file = new File(path);
             if (user_file.exists()) {
@@ -59,6 +59,8 @@ public class LoginController {
             }else {
                 lblUserNotification.setText("Usuário não existe");
             }
+        }else {
+            lblUserNotification.setText("Senha incorreta");
         }
     }
 }
