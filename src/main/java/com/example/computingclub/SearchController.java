@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static com.example.computingclub.Util.changeScreen;
+import static com.example.computingclub.Util.loadUser;
+
 public class SearchController implements Initializable {
 
     @FXML
@@ -34,30 +37,19 @@ public class SearchController implements Initializable {
 
     @FXML
     void actionSearch(ActionEvent event) throws IOException, ClassNotFoundException{
-        FileInputStream fis = new FileInputStream("src/main/accounts/" + searchField.getText() + ".ser");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        User current = (User) ois.readObject();
-        ois.close();
+
+        User current = loadUser("src/main/accounts/" + searchField.getText() + ".ser");
+
         // load searched name's user into visitor
         VisitHolder visHolder = VisitHolder.getInstance();
         visHolder.setUser(current);
 
-        Parent visit = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("visitScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(visit);
-        stage.setTitle("Perfil de " + current.getName());
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "visitScene.fxml", "Perfil de " + current.getName());
     }
 
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
-        Parent perfil = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(perfil);
-        stage.setTitle("Perfil");
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "profileScene.fxml", "Perfil");
     }
 
     @Override

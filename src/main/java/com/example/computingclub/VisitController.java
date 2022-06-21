@@ -7,38 +7,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.ResourceBundle;
+
+import static com.example.computingclub.Util.changeScreen;
+import static com.example.computingclub.Util.saveUser;
 
 public class VisitController implements Initializable {
 
-    @FXML
-    private Pane bgFolloing;
-    @FXML
-    private Pane bgFollower;
-    @FXML
-    private Text followerText;
-    @FXML
-    private Text followingText;
     @FXML
     private Label lblAddress;
     @FXML
@@ -77,24 +61,10 @@ public class VisitController implements Initializable {
         VisitHolder visHolder = VisitHolder.getInstance();
         User currentVis = visHolder.getUser();
 
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-        stage.setTitle("Busca");
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "searchScene.fxml", "Busca");
 
-        String path = "src/main/accounts/" + currentVis.getName() + ".ser";
-        FileOutputStream fos = new FileOutputStream(path);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(currentVis);
-        oos.close();
-
-        path = "src/main/accounts/" + currentUsr.getName() + ".ser";
-        fos = new FileOutputStream(path);
-        oos = new ObjectOutputStream(fos);
-        oos.writeObject(currentUsr);
-        oos.close();
+        saveUser(currentVis, "src/main/accounts/" + currentVis.getName() + ".ser");
+        saveUser(currentUsr, "src/main/accounts/" + currentUsr.getName() + ".ser");
     }
 
     @FXML
@@ -107,18 +77,15 @@ public class VisitController implements Initializable {
         if (!currentVis.getFollowers().contains(currentUsr.getName())) {
             currentVis.getFollowers().add(currentUsr.getName());
             currentUsr.getFollowing().add(currentVis.getName());
-            usrHolder.setUser(currentUsr);
-            visHolder.setUser(currentVis);
 
-            loadFollows();
         } else {
             currentVis.getFollowers().remove(currentUsr.getName());
             currentUsr.getFollowing().remove(currentVis.getName());
-            usrHolder.setUser(currentUsr);
-            visHolder.setUser(currentVis);
 
-            loadFollows();
         }
+        usrHolder.setUser(currentUsr);
+        visHolder.setUser(currentVis);
+        loadFollows();
     }
 
     @Override

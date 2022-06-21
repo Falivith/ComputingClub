@@ -20,6 +20,8 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
+import static com.example.computingclub.Util.changeScreen;
+
 public class DashController implements Initializable {
 
     @FXML
@@ -31,31 +33,26 @@ public class DashController implements Initializable {
 
     @FXML
     void gotoProfile(ActionEvent event) throws IOException {
-        Parent perfil = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(perfil);
-        stage.setTitle("Perfil");
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "profileScene.fxml", "Perfil");
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
+
         VisitHolder visHolder = VisitHolder.getInstance();
         User timeline = visHolder.getUser();
 
-        String dashholder = "= = = = = = = = = = = = = = = = = = = =\n\n";
+        String dashHolder = "= = = = = = = = = = = = = = = = = = = =\n\n";
 
         for (Post pos : timeline.getPosts()) {
             if (currentUsr.getFollowing().contains(pos.getAuthor())) {
-                dashholder = dashholder + pos.getAuthor() + pos.getDate() + pos.getContent();
+                dashHolder = dashHolder + pos.getAuthor() + pos.getDate() + pos.getContent();
             }
         }
-        dashText.setText(dashholder);
-
+        dashText.setText(dashHolder);
         bgDash.setPrefHeight(dashText.getBoundsInLocal().getHeight());
     }
-
 }

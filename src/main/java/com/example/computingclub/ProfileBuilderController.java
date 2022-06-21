@@ -16,6 +16,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static com.example.computingclub.Util.changeScreen;
+import static com.example.computingclub.Util.saveUser;
+
 public class ProfileBuilderController {
 
     @FXML
@@ -25,12 +28,12 @@ public class ProfileBuilderController {
     @FXML
     private Label userNotification;
 
-    //
-
     @FXML
     void btnCreate(ActionEvent event) throws IOException {
+
         String path = "src/main/accounts/" + newUserField.getText() + ".ser";
         File user_file = new File(path);
+
         if (!user_file.exists()) {
             // dummies setup
             Post dummyPost = new Post("", "", "");
@@ -40,13 +43,10 @@ public class ProfileBuilderController {
             dummyFollower.add(newUserField.getText());
             ArrayList<String> dummyFollowing = new ArrayList<>();
             dummyFollowing.add(newUserField.getText());
+
             // creates a new user
             User newUser = new User(newUserField.getText(), newUserPassword.getText(), dummyPostArray, dummyFollower, dummyFollowing);
-
-            FileOutputStream fos = new FileOutputStream(path);
-            ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(newUser);
-            oos.close();
+            saveUser(newUser, path);
             userNotification.setText("Usuário criado com sucesso");
         }else {
             userNotification.setText("Usuário já existe");
@@ -57,11 +57,6 @@ public class ProfileBuilderController {
 
     @FXML
     void btnLogout(ActionEvent event) throws IOException {
-        Parent login = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(login);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "loginScene.fxml", "Login");
     }
 }

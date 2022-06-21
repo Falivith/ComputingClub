@@ -21,6 +21,8 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import static com.example.computingclub.Util.*;
+
 public class ProfileController implements Initializable {
     @FXML
     private TextField addressField;
@@ -57,48 +59,29 @@ public class ProfileController implements Initializable {
 
     @FXML
     void actionLogout(ActionEvent event) throws IOException {
+
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
 
-        FileOutputStream fos = new FileOutputStream("src/main/accounts/" + currentUsr.getName() + ".ser");
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(currentUsr);
-        oos.close();
-
-        Parent parent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("loginScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(parent);
-        stage.setTitle("Login");
-        stage.setScene(scene);
-        stage.show();
+        saveUser(currentUsr, "src/main/accounts/" + currentUsr.getName() + ".ser");
+        changeScreen(event, "loginScene.fxml", "Login");
     }
 
     @FXML
     void gotoDash(ActionEvent event) throws IOException, ClassNotFoundException{
-        FileInputStream fis = new FileInputStream("src/main/admin/admin.ser");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        User timeline = (User) ois.readObject();
-        ois.close();
+
+        User timeline = loadUser("src/main/admin/admin.ser");
+
         // repurpose of visit into a timeline using admin
         VisitHolder visHolder = VisitHolder.getInstance();
         visHolder.setUser(timeline);
 
-        Parent dash = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("dashScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(dash);
-        stage.setTitle("Dashboard");
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "dashScene.fxml", "Dashboard");
     }
 
     @FXML
     void gotoSearch(ActionEvent event) throws IOException {
-        Parent busca = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(busca);
-        stage.setTitle("Busca");
-        stage.setScene(scene);
-        stage.show();
+        changeScreen(event, "searchScene.fxml", "Busca");
     }
 
     @FXML
@@ -117,11 +100,7 @@ public class ProfileController implements Initializable {
         currentUsr.setInterest3(interestField3.getText());
         currentUsr.setInterest4(interestField4.getText());
 
-        String file_path = "src/main/accounts/" + currentUsr.getName() + ".ser";
-        FileOutputStream fOut = new FileOutputStream(file_path);
-        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
-        oOut.writeObject(currentUsr);
-        oOut.close();
+        saveUser(currentUsr, "src/main/accounts/" + currentUsr.getName() + ".ser");
 
         userNotification.setVisible(true);
     }
@@ -187,11 +166,7 @@ public class ProfileController implements Initializable {
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
 
-        String path = "src/main/admin/admin.ser";
-        FileInputStream fis = new FileInputStream(path);
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        User timeline = (User) ois.readObject();
-        ois.close();
+        User timeline = loadUser("src/main/admin/admin.ser");
 
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
@@ -202,10 +177,7 @@ public class ProfileController implements Initializable {
 
         usrHolder.setUser(currentUsr);
 
-        FileOutputStream fos = new FileOutputStream(path);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-        oos.writeObject(timeline);
-        oos.close();
+        saveUser(timeline, "src/main/admin/admin.ser");
 
         lblPost.setVisible(true);
         postField.setText("");

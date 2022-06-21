@@ -5,17 +5,12 @@ import com.example.computingclub.userset.User;
 import com.example.computingclub.userset.UserHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
+
+import static com.example.computingclub.Util.*;
 
 public class LoginController {
     @FXML
@@ -23,50 +18,33 @@ public class LoginController {
     @FXML
     private PasswordField passwordField;
 
-    //
-
     @FXML
     void btnLoginAction(ActionEvent event) throws IOException, ClassNotFoundException {
         if (loginField.getText().equals("admin") && passwordField.getText().equals("UFP31")) {
+
             String path = "src/main/admin/admin.ser";
             File user_file = new File(path);
+
+            // Create admin File if he doesn't exist
+
             if (!user_file.exists()) {
                 Post dummyPost = new Post("", "", "");
                 ArrayList<Post> dummyPostArray = new ArrayList<>();
                 dummyPostArray.add(dummyPost);
                 ArrayList<String> dummyFollow = new ArrayList<>();
                 dummyFollow.add("");
-                // creates a new user
-                User admin = new User("", "", dummyPostArray, dummyFollow, dummyFollow);
 
-                FileOutputStream fos = new FileOutputStream(path);
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(admin);
-                oos.close();
+                User admin = new User("", "", dummyPostArray, dummyFollow, dummyFollow);
+                saveUser(admin, path);
             }
-            Parent criaperfil = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileBuilderScene.fxml")));
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(criaperfil);
-            stage.setTitle("ADMIN - Criação de perfil");
-            stage.setScene(scene);
-            stage.show();
+            changeScreen(event, "profileBuilderScene.fxml", "ADMIN - Criação de Perfis");
         }
         else{
-            FileInputStream fis = new FileInputStream("src/main/accounts/" + loginField.getText() + ".ser");
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            User currentUsr = (User) ois.readObject();
-            ois.close();
-
+            User currentUsr = loadUser("src/main/accounts/" + loginField.getText() + ".ser");
             UserHolder usrHolder = UserHolder.getInstance();
             usrHolder.setUser(currentUsr);
-
             if (currentUsr.getPassword().equals(passwordField.getText())) {
-                Parent perfil = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("profileScene.fxml")));
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                Scene scene = new Scene(perfil);
-                stage.setTitle("Perfil");
-                stage.setScene(scene);
-                stage.show();
+                changeScreen(event, "profileScene.fxml", "Perfil");
             }
         }
     }
