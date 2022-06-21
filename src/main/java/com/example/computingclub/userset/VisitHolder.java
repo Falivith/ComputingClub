@@ -1,13 +1,13 @@
 package com.example.computingclub.userset;
 
-public final class VisitorHolder {
+public final class VisitHolder {
 
     private User user;
-    private final static VisitorHolder INSTANCE = new VisitorHolder();
+    private final static VisitHolder INSTANCE = new VisitHolder();
 
-    private VisitorHolder() {}
+    private VisitHolder() {}
 
-    public static VisitorHolder getInstance() {
+    public static VisitHolder getInstance() {
         return INSTANCE;
     }
 

@@ -18,7 +18,7 @@
          <children>
             <ScrollPane layoutY="-1.0" prefHeight="345.0" prefWidth="280.0">
                <content>
-                  <Pane fx:id="bgDash" prefHeight="410.0" prefWidth="260.0" style="-fx-background-color: gray;">
+                  <Pane fx:id="bgDash" minHeight="343.0" prefHeight="343.0" prefWidth="278.0" style="-fx-background-color: gray;">
                      <children>
                         <Text fx:id="dashText" layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="231.13671875" />
                      </children>

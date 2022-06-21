@@ -2,35 +2,25 @@ package com.example.computingclub.userset;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class User implements Serializable {
-    private int id;
     private String name;
-    private String address = "blank";
-    private String email = "blank";
-    private String phone = "blank";
-    private String website = "blank";
-    private String education = "blank";
-    private String interest1 = "blank";
-    private String interest2 = "blank";
-    private String interest3 = "blank";
-    private String interest4 = "blank";
     private String password;
-
-
     private ArrayList<Post> posts;
     private ArrayList<String> followers;
     private ArrayList<String> following;
 
-    public int getId() {
-        return id;
-    }
+    private String address = "";
+    private String contact1 = "";
+    private String contact2 = "";
+    private String website = "";
+    private String education = "";
+    private String interest1 = "";
+    private String interest2 = "";
+    private String interest3 = "";
+    private String interest4 = "";
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    //
 
     public String getName() {
         return name;
@@ -38,6 +28,18 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<Post> getPosts() {
+        return posts;
+    }
+
+    public ArrayList<String> getFollowers() {
+        return followers;
+    }
+
+    public ArrayList<String> getFollowing() {
+        return following;
     }
 
     public String getAddress() {
@@ -48,20 +50,20 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
+    public String getContact1() {
+        return contact1;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setContact1(String contact1) {
+        this.contact1 = contact1;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getContact2() {
+        return contact2;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setContact2(String contact2) {
+        this.contact2 = contact2;
     }
 
     public String getWebsite() {
@@ -116,44 +118,15 @@ public class User implements Serializable {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public ArrayList<Post> getPosts() {
-        return posts;
-    }
+    //
 
-    public void setPosts(ArrayList<Post> posts) {
-        this.posts = posts;
-    }
-
-    public ArrayList<String> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(ArrayList<String> followers) {
-        this.followers = followers;
-    }
-
-    public ArrayList<String> getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(ArrayList<String> following) {
-        this.following = following;
-    }
-
-    //Constructor
-    public User(int id,
-                String name,
+    public User(String name,
                 String password,
                 ArrayList<Post> posts,
                 ArrayList<String> followers,
                 ArrayList<String> following
                 ){
-        this.id = id;
         this.name = name;
-
         this.password = password;
 
         this.posts = posts;
