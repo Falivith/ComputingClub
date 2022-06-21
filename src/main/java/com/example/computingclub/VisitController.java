@@ -1,5 +1,6 @@
 package com.example.computingclub;
 
+import com.example.computingclub.userset.Post;
 import com.example.computingclub.userset.User;
 import com.example.computingclub.userset.UserHolder;
 import com.example.computingclub.userset.VisitHolder;
@@ -11,6 +12,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -45,12 +49,17 @@ public class VisitController implements Initializable {
     private Label lblWebsite;
     @FXML
     private Button btnFollow;
-
     @FXML
     private ListView<String> listFollowers;
-
     @FXML
     private ListView<String> listFollowing;
+    @FXML
+    private Pane bgDash;
+    @FXML
+    private Text dashText;
+
+    public VisitController() {
+    }
 
     //
 
@@ -105,6 +114,14 @@ public class VisitController implements Initializable {
         lblInterest2.setText(currentVis.getInterest2());
         lblInterest3.setText(currentVis.getInterest3());
         lblInterest4.setText(currentVis.getInterest4());
+
+        String dashHolder = "= = = = = = = = = = = = = = = = = = = =\n\n";
+
+        for (Post pos : currentVis.getPosts()) {
+            dashHolder = dashHolder + pos.getAuthor() + pos.getDate() + pos.getContent();
+        }
+        dashText.setText(dashHolder);
+        bgDash.setPrefHeight(dashText.getBoundsInLocal().getHeight());
     }
 
     void loadFollows() {
