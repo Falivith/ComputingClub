@@ -21,6 +21,8 @@ public class User implements Serializable {
 
 
     private ArrayList<Post> posts;
+    private ArrayList<String> followers;
+    private ArrayList<String> following;
 
     public int getId() {
         return id;
@@ -117,22 +119,6 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    //Constructor
-    public User(int id,
-                String name,
-                String password,
-                ArrayList<Post> posts
-                ){
-        this.id = id;
-        this.name = name;
-
-        this.password = password;
-
-        this.posts = posts;
-
-    }
-
     public ArrayList<Post> getPosts() {
         return posts;
     }
@@ -140,4 +126,39 @@ public class User implements Serializable {
     public void setPosts(ArrayList<Post> posts) {
         this.posts = posts;
     }
+
+    public ArrayList<String> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(ArrayList<String> followers) {
+        this.followers = followers;
+    }
+
+    public ArrayList<String> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(ArrayList<String> following) {
+        this.following = following;
+    }
+
+    //Constructor
+    public User(int id,
+                String name,
+                String password,
+                ArrayList<Post> posts,
+                ArrayList<String> followers,
+                ArrayList<String> following
+                ){
+        this.id = id;
+        this.name = name;
+
+        this.password = password;
+
+        this.posts = posts;
+        this.followers = followers;
+        this.following = following;
+    }
+
 }

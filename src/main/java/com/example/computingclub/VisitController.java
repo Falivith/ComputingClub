@@ -1,5 +1,6 @@
 package com.example.computingclub;
 
+import com.example.computingclub.userset.Post;
 import com.example.computingclub.userset.User;
 import com.example.computingclub.userset.UserHolder;
 import com.example.computingclub.userset.VisitorHolder;
@@ -10,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -71,17 +73,34 @@ public class VisitController implements Initializable {
     @FXML
     private Label lblWebsite;
 
-    List<String> following = new ArrayList<>();
-    List<String> followers = new ArrayList<>();
+    @FXML
+    private Button btnFollow;
 
     @FXML
     void gotoSearch(ActionEvent event) throws IOException {
+        VisitorHolder holder = VisitorHolder.getInstance();
+        User actualv = holder.getUser();
+        UserHolder uholder = UserHolder.getInstance();
+        User actualu = uholder.getUser();
+
         Parent search = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("searchScene.fxml")));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(search);
         stage.setTitle("Busca");
         stage.setScene(scene);
         stage.show();
+
+        String file_path = "src/main/accounts/" + actualv.getName() + ".ser";
+        FileOutputStream fOut = new FileOutputStream(file_path);
+        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(actualv);
+        oOut.close();
+
+        file_path = "src/main/accounts/" + actualu.getName() + ".ser";
+        fOut = new FileOutputStream(file_path);
+        oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(actualu);
+        oOut.close();
     }
 
     @Override
@@ -89,47 +108,74 @@ public class VisitController implements Initializable {
         loadFollows();
 
         VisitorHolder holder = VisitorHolder.getInstance();
-        User current = holder.getUser();
+        User actual = holder.getUser();
 
-        lblName.setText(current.getName());
-        lblAddress.setText(current.getAddress());
-        lblContact1.setText(current.getEmail());
-        lblContact2.setText(current.getPhone());
-        lblWebsite.setText(current.getWebsite());
-        lblEducation.setText(current.getEducation());
-        lblInterest1.setText(current.getInterest1());
-        lblInterest2.setText(current.getInterest2());
-        lblInterest3.setText(current.getInterest3());
-        lblInterest4.setText(current.getInterest4());
+        lblName.setText(actual.getName());
+        lblAddress.setText(actual.getAddress());
+        lblContact1.setText(actual.getEmail());
+        lblContact2.setText(actual.getPhone());
+        lblWebsite.setText(actual.getWebsite());
+        lblEducation.setText(actual.getEducation());
+        lblInterest1.setText(actual.getInterest1());
+        lblInterest2.setText(actual.getInterest2());
+        lblInterest3.setText(actual.getInterest3());
+        lblInterest4.setText(actual.getInterest4());
     }
 
     void loadFollows() {
-        bgFolloing.setPrefHeight(followingText.getBoundsInLocal().getHeight() + 50);
-        bgFollower.setPrefHeight(followerText.getBoundsInLocal().getHeight() + 50);
+        VisitorHolder vholder = VisitorHolder.getInstance();
+        User actualv = vholder.getUser();
+        UserHolder uholder = UserHolder.getInstance();
+        User actualu = uholder.getUser();
+
+        String followholder = "";
+
+        for (String pos : actualv.getFollowers()) {
+            followholder = followholder + pos + "\n";
+        }
+        followerText.setText(followholder);
+
+        followholder = "";
+
+        for (String pos : actualv.getFollowing()) {
+            followholder = followholder + pos + "\n";
+        }
+        followingText.setText(followholder);
+
+        bgFolloing.setPrefHeight(followingText.getBoundsInLocal().getHeight() + 10);
+        bgFollower.setPrefHeight(followerText.getBoundsInLocal().getHeight() + 10);
+
+        if (actualu.getName().equals(actualv.getName())) {
+            btnFollow.setVisible(false);
+        } else if (actualv.getFollowers().contains(actualu.getName())) {
+            btnFollow.setText("Deixar de seguir");
+        } else {
+            btnFollow.setText("Seguir");
+        }
     }
 
     @FXML
-    void actionFollow(ActionEvent event) throws IOException {
+    void actionFollow(ActionEvent event) {
         VisitorHolder vholder = VisitorHolder.getInstance();
-        User current = vholder.getUser();
+        User actualv = vholder.getUser();
         UserHolder uholder = UserHolder.getInstance();
-        User actual = uholder.getUser();
+        User actualu = uholder.getUser();
 
-        following.add(current.getName());
-        followers.add(actual.getName());
+        if (!actualv.getFollowers().contains(actualu.getName())) {
+            actualv.getFollowers().add(actualu.getName());
+            actualu.getFollowing().add(actualv.getName());
+            uholder.setUser(actualu);
+            vholder.setUser(actualv);
 
-        String file_path = "src/main/lists/" + actual.getId() + "flin.ser";
-        FileOutputStream fOut = new FileOutputStream(file_path);
-        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
-        oOut.writeObject(following);
-        oOut.close();
-        file_path = "src/main/lists/" + current.getId() + "fler.ser";
-        fOut = new FileOutputStream(file_path);
-        oOut = new ObjectOutputStream(fOut);
-        oOut.writeObject(followers);
-        oOut.close();
+            loadFollows();
+        } else {
+            actualv.getFollowers().remove(actualu.getName());
+            actualu.getFollowing().remove(actualv.getName());
+            uholder.setUser(actualu);
+            vholder.setUser(actualv);
 
-
+            loadFollows();
+        }
     }
 
 }

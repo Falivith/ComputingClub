@@ -35,26 +35,31 @@ public class ProfileBuilderController implements Initializable {
     void btnCreate(ActionEvent event) throws IOException, ClassNotFoundException {
 
         //Check if the file exists, if not, he made it
-        File file = new File("src/main/idCount.ser");
+        File file = new File("src/main/idcount/idCount.ser");
         if (!file.exists()){
-            FileOutputStream idStream = new FileOutputStream("src/main/idCount.ser");
+            FileOutputStream idStream = new FileOutputStream("src/main/idcount/idCount.ser");
             ObjectOutputStream out = new ObjectOutputStream(idStream);
             out.writeObject(AdminPersistentData.getUserCount(false));
             out.close();
         }
 
-        FileInputStream fis = new FileInputStream("src/main/idCount.ser");
+        FileInputStream fis = new FileInputStream("src/main/idcount/idCount.ser");
         ObjectInputStream ois = new ObjectInputStream(fis);
         AdminPersistentData.setUserCount((Integer)ois.readObject());
         ois.close();
 
-        File user_file = new File("src/main/idCount/" + newUserField.getText() + ".ser");
+        File user_file = new File("src/main/accounts/" + newUserField.getText() + ".ser");
         if (!user_file.exists()) {
             Post dummy = new Post("", "", "");
             ArrayList<Post> dummyarray = new ArrayList<>();
             dummyarray.add(dummy);
 
-            User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText(), dummyarray);
+            ArrayList<String> dummyfollow = new ArrayList<>();
+            dummyfollow.add(newUserField.getText());
+            ArrayList<String> dummyfollower = new ArrayList<>();
+            dummyfollower.add(newUserField.getText());
+
+            User newUser = new User(AdminPersistentData.getUserCount(true), newUserField.getText(), newUserPassword.getText(), dummyarray, dummyfollower, dummyfollow);
 
             String file_path = "src/main/accounts/" + newUser.getName() + ".ser";
             FileOutputStream fOut = new FileOutputStream(file_path);
@@ -64,7 +69,7 @@ public class ProfileBuilderController implements Initializable {
             userNotification.setText("Usuário de ID " + newUser.getId() + " criado com sucesso");
 
             //Save Actual ID
-            FileOutputStream idStream = new FileOutputStream("src/main/idCount.ser");
+            FileOutputStream idStream = new FileOutputStream("src/main/idcount/idCount.ser");
             ObjectOutputStream out = new ObjectOutputStream(idStream);
             out.writeObject(AdminPersistentData.getUserCount(false));
             out.close();

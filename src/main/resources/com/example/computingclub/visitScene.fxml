@@ -12,8 +12,8 @@
    <children>
       <Pane prefHeight="541.0" prefWidth="600.0">
          <children>
-            <Label layoutX="312.0" layoutY="181.0" text="Seguindo" />
-            <Label layoutX="320.0" layoutY="24.0" text="Seguidores" />
+            <Label layoutX="251.0" layoutY="187.0" prefHeight="17.0" prefWidth="59.0" text="Seguindo" />
+            <Label layoutX="250.0" layoutY="29.0" text="Seguidores" />
             <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoSearch" text="Voltar" />
             <ScrollPane layoutX="250.0" layoutY="207.0" prefHeight="112.0" prefWidth="200.0">
                <content>
@@ -49,7 +49,7 @@
             <Label fx:id="lblInterest2" layoutX="70.0" layoutY="270.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblInterest3" layoutX="70.0" layoutY="302.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblInterest4" layoutX="70.0" layoutY="332.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Button layoutX="415.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionFollow" text="Seguir" />
+            <Button fx:id="btnFollow" layoutX="362.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionFollow" text="Seguir" />
          </children>
       </Pane>
    </children>

@@ -154,6 +154,23 @@ public class ProfileController implements Initializable {
     }
 
     void loadFollows() {
+        UserHolder uholder = UserHolder.getInstance();
+        User actual = uholder.getUser();
+
+        String followholder = "";
+
+        for (String pos : actual.getFollowers()) {
+            followholder = followholder + pos + "\n";
+        }
+        followerText.setText(followholder);
+
+        followholder = "";
+
+        for (String pos : actual.getFollowing()) {
+            followholder = followholder + pos + "\n";
+        }
+        followingText.setText(followholder);
+
         bgFolloing.setPrefHeight(followingText.getBoundsInLocal().getHeight() + 50);
         bgFollower.setPrefHeight(followerText.getBoundsInLocal().getHeight() + 50);
     }
