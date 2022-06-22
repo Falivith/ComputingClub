@@ -1,6 +1,7 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
+import com.example.computingclub.userset.UserHolder;
 import com.example.computingclub.userset.VisitHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +41,11 @@ public final class Util {
     }
 
     public static void changeOnClick(MouseEvent event, ListView<String> listView) throws IOException, ClassNotFoundException {
+        UserHolder usrHolder = UserHolder.getInstance();
+        User currentUsr = usrHolder.getUser();
+
+        saveUser(currentUsr, "src/main/accounts/" + currentUsr.getName() + ".ser");
+
         String selected = listView.getSelectionModel().getSelectedItem();
 
         User current = loadUser("src/main/accounts/" + selected + ".ser");
