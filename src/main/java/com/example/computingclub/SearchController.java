@@ -1,21 +1,27 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
-import com.example.computingclub.userset.UserHolder;
 import com.example.computingclub.userset.VisitHolder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static com.example.computingclub.Util.changeScreen;
@@ -26,30 +32,9 @@ public class SearchController implements Initializable {
     private ListView<String> listViewUsers;
     private final List<String> users = new ArrayList<>();
     @FXML
-    private TextField searchField;
-    @FXML
-    private TextField interestField;
-    @FXML
-    private Label lblUserNotification;
+    private TextField filterField;
 
     //
-
-    @FXML
-    void actionSearch(ActionEvent event) throws IOException, ClassNotFoundException{
-        String path = "src/main/accounts/" + searchField.getText() + ".ser";
-        File user_file = new File(path);
-
-        if (user_file.exists()) {
-            User current = loadUser("src/main/accounts/" + searchField.getText() + ".ser");
-            // load searched name's user into visitor
-            VisitHolder visHolder = VisitHolder.getInstance();
-            visHolder.setUser(current);
-
-            changeScreen(event, "visitScene.fxml", "Perfil de " + current.getName());
-        }else {
-            lblUserNotification.setText("Usuário não existe");
-        }
-    }
 
     @FXML
     void actionFilter(ActionEvent event) {
@@ -62,10 +47,11 @@ public class SearchController implements Initializable {
 
                 User test = loadUser("src/main/accounts/" + fl.getName());
 
-                if (interestField.getText().equals(test.getInterest1()) ||
-                    interestField.getText().equals(test.getInterest2()) ||
-                    interestField.getText().equals(test.getInterest3()) ||
-                    interestField.getText().equals(test.getInterest4())) {
+                if (filterField.getText().equals(test.getInterest1()) ||
+                    filterField.getText().equals(test.getInterest2()) ||
+                    filterField.getText().equals(test.getInterest3()) ||
+                    filterField.getText().equals(test.getInterest4()) ||
+                    filterField.getText().equals(test.getName())) {
                     users.add((fl.getName().replace(".ser", "")));
                 }
             }
@@ -99,5 +85,23 @@ public class SearchController implements Initializable {
         }
         ObservableList<String> obsUsers = FXCollections.observableArrayList(users);
         listViewUsers.setItems(obsUsers);
+    }
+
+
+    @FXML
+    void actionSelect(MouseEvent event) throws IOException, ClassNotFoundException {
+        String selected = listViewUsers.getSelectionModel().getSelectedItem();
+
+        User current = loadUser("src/main/accounts/" + selected + ".ser");
+        // load searched name's user into visitor
+        VisitHolder visHolder = VisitHolder.getInstance();
+        visHolder.setUser(current);
+        // can't use the changescreen method because of mouseevent
+        Parent nextScene = FXMLLoader.load(Objects.requireNonNull(Util.class.getResource("visitScene.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(nextScene);
+        stage.setTitle("Perfil de " + current.getName());
+        stage.setScene(scene);
+        stage.show();
     }
 }
