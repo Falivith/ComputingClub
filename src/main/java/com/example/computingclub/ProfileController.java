@@ -14,7 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -55,6 +58,9 @@ public class ProfileController implements Initializable {
     private ListView<String> listFollowers;
     @FXML
     private ListView<String> listFollowing;
+
+    @FXML
+    private ImageView imgContainer;
 
     //
 
@@ -108,12 +114,30 @@ public class ProfileController implements Initializable {
         userNotification.setVisible(true);
     }
 
+    @FXML
+    void changePhoto(ActionEvent event) {
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+
+        UserHolder usrHolder = UserHolder.getInstance();
+        User currentUsr = usrHolder.getUser();
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Abrir Imagem");
+
+
+        currentUsr.setImgPath(String.valueOf(fileChooser.showOpenDialog(stage)));
+
+        imgContainer.setImage(new Image(String.valueOf(currentUsr.getImgPath())));
+        System.out.println(currentUsr.getImgPath());
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadFollows();
 
         UserHolder usrHolder = UserHolder.getInstance();
         User currentUsr = usrHolder.getUser();
+
         // loads and displays user info
         lblName.setText(currentUsr.getName());
         addressField.setText(currentUsr.getAddress());
@@ -125,6 +149,8 @@ public class ProfileController implements Initializable {
         interestField2.setText(currentUsr.getInterest2());
         interestField3.setText(currentUsr.getInterest3());
         interestField4.setText(currentUsr.getInterest4());
+
+        imgContainer.setImage(new Image(String.valueOf(currentUsr.getImgPath())));
     }
 
     @FXML

@@ -16,6 +16,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -63,6 +65,9 @@ public class VisitController implements Initializable {
     private Pane bgDash;
     @FXML
     private Text dashText;
+
+    @FXML
+    private ImageView imgContainer;
 
     //
 
@@ -125,6 +130,8 @@ public class VisitController implements Initializable {
         }
         dashText.setText(dashHolder);
         bgDash.setPrefHeight(dashText.getBoundsInLocal().getHeight());
+
+        imgContainer.setImage(new Image(String.valueOf(currentVis.getImgPath())));
     }
 
     void loadFollows() {
