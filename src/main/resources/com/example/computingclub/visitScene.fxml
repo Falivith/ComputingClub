@@ -10,43 +10,47 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computingclub.VisitController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="858.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.computingclub.VisitController">
    <children>
       <Pane prefHeight="397.0" prefWidth="660.0">
          <children>
-            <Label alignment="CENTER" layoutX="65.0" layoutY="222.0" prefHeight="17.0" prefWidth="59.0" text="Seguindo" />
-            <Label alignment="CENTER" layoutX="192.0" layoutY="222.0" text="Seguidores" />
+            <Label alignment="CENTER" layoutX="70.0" layoutY="222.0" prefHeight="17.0" prefWidth="59.0" text="Seguindo" />
+            <Label alignment="CENTER" layoutX="264.0" layoutY="222.0" text="Seguidores" />
             <Button layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#gotoSearch" text="Voltar" />
             <Label layoutX="31.0" layoutY="43.0" prefHeight="17.0" prefWidth="38.0" text="Nome:" />
             <Label layoutX="14.0" layoutY="76.0" prefHeight="17.0" prefWidth="55.0" text="Endereço:" />
             <Label layoutX="15.0" layoutY="108.0" text="Contatos:" />
             <Label layoutX="20.0" layoutY="173.0" prefHeight="17.0" prefWidth="50.0" text="Website:" />
-            <Label layoutX="160.0" layoutY="43.0" text="Formação:" />
-            <Label layoutX="160.0" layoutY="76.0" text="Interesses:" />
+            <Label layoutX="267.0" layoutY="43.0" text="Formação:" />
+            <Label layoutX="267.0" layoutY="76.0" text="Interesses:" />
             <Label fx:id="lblName" layoutX="70.0" layoutY="43.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblAddress" layoutX="70.0" layoutY="76.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblContact1" layoutX="70.0" layoutY="108.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblWebsite" layoutX="70.0" layoutY="173.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Label fx:id="lblEducation" layoutX="220.0" layoutY="43.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Label fx:id="lblInterest1" layoutX="220.0" layoutY="76.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
+            <Label fx:id="lblEducation" layoutX="327.0" layoutY="43.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
+            <Label fx:id="lblInterest1" layoutX="327.0" layoutY="76.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
             <Label fx:id="lblContact2" layoutX="70.0" layoutY="141.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Label fx:id="lblInterest2" layoutX="220.0" layoutY="108.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Label fx:id="lblInterest3" layoutX="220.0" layoutY="141.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Label fx:id="lblInterest4" layoutX="220.0" layoutY="173.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
-            <Button fx:id="btnFollow" layoutX="165.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionFollow" prefHeight="25.0" prefWidth="110.0" text="Seguir" />
-            <ListView fx:id="listFollowers" layoutX="160.0" layoutY="247.0" onMouseClicked="#actionSelectFollower" prefHeight="145.0" prefWidth="123.0" />
-            <ListView fx:id="listFollowing" layoutX="25.0" layoutY="247.0" onMouseClicked="#actionSelectFollowing" prefHeight="145.0" prefWidth="123.0" />
-            <ScrollPane layoutX="315.0" layoutY="207.0" prefHeight="187.0" prefWidth="280.0">
+            <Label fx:id="lblInterest2" layoutX="327.0" layoutY="108.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
+            <Label fx:id="lblInterest3" layoutX="327.0" layoutY="141.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
+            <Label fx:id="lblInterest4" layoutX="327.0" layoutY="173.0" prefHeight="17.0" prefWidth="168.0" text="Label" />
+            <Button fx:id="btnFollow" layoutX="708.0" layoutY="2.0" mnemonicParsing="false" onAction="#actionFollow" prefHeight="25.0" prefWidth="110.0" text="Seguir" />
+            <ListView fx:id="listFollowers" layoutX="210.0" layoutY="247.0" onMouseClicked="#actionSelectFollower" prefHeight="145.0" prefWidth="168.0" />
+            <ListView fx:id="listFollowing" layoutX="15.0" layoutY="247.0" onMouseClicked="#actionSelectFollowing" prefHeight="145.0" prefWidth="168.0" />
+            <ScrollPane layoutX="538.0" layoutY="50.0" prefHeight="345.0" prefWidth="280.0">
                <content>
-                  <Pane fx:id="bgDash" minHeight="247.0" prefHeight="247.0" prefWidth="278.0" style="-fx-background-color: gray;">
+                  <Pane fx:id="bgDash" minHeight="343.0" prefHeight="343.0" prefWidth="278.0" style="-fx-background-color: gray;">
                      <children>
                         <Text fx:id="dashText" layoutX="12.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="231.13671875" />
                      </children>
                   </Pane>
                </content>
             </ScrollPane>
-            <Label layoutX="324.0" layoutY="182.0" text="Posts" />
-            <ImageView fx:id="imgContainer" fitHeight="150.0" fitWidth="168.0" layoutX="387.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="546.0" layoutY="27.0" text="Posts" />
+            <Pane layoutX="389.0" layoutY="275.0" prefHeight="120.0" prefWidth="123.0" style="-fx-background-color: gray;">
+               <children>
+                  <ImageView fx:id="imgContainer" fitHeight="108.0" fitWidth="110.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
