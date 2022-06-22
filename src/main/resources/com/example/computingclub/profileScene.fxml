@@ -41,7 +41,7 @@
       <Label fx:id="lblPost" layoutX="621.0" layoutY="128.0" text="Publicado" visible="false" />
       <Button layoutX="618.0" layoutY="149.0" mnemonicParsing="false" onAction="#actionPost" text="Publicar" />
       <Label fx:id="lblName" layoutX="76.0" layoutY="43.0" prefHeight="17.0" prefWidth="149.0" text="Nome" />
-      <ListView fx:id="listFollowing" layoutX="250.0" layoutY="205.0" prefHeight="180.0" prefWidth="180.0" />
-      <ListView fx:id="listFollowers" layoutX="473.0" layoutY="207.0" prefHeight="180.0" prefWidth="180.0" />
+      <ListView fx:id="listFollowing" layoutX="250.0" layoutY="205.0" onMouseClicked="#actionSelectFollowing" prefHeight="180.0" prefWidth="180.0" />
+      <ListView fx:id="listFollowers" layoutX="473.0" layoutY="207.0" onMouseClicked="#actionSelectFollower" prefHeight="180.0" prefWidth="180.0" />
    </Pane>
 </VBox>

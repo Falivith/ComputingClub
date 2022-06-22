@@ -24,8 +24,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.example.computingclub.Util.changeScreen;
-import static com.example.computingclub.Util.loadUser;
+import static com.example.computingclub.Util.*;
 
 public class SearchController implements Initializable {
     @FXML
@@ -90,18 +89,6 @@ public class SearchController implements Initializable {
 
     @FXML
     void actionSelect(MouseEvent event) throws IOException, ClassNotFoundException {
-        String selected = listViewUsers.getSelectionModel().getSelectedItem();
-
-        User current = loadUser("src/main/accounts/" + selected + ".ser");
-        // load searched name's user into visitor
-        VisitHolder visHolder = VisitHolder.getInstance();
-        visHolder.setUser(current);
-        // can't use the changescreen method because of mouseevent
-        Parent nextScene = FXMLLoader.load(Objects.requireNonNull(Util.class.getResource("visitScene.fxml")));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(nextScene);
-        stage.setTitle("Perfil de " + current.getName());
-        stage.setScene(scene);
-        stage.show();
+        changeOnClick(event, listViewUsers);
     }
 }

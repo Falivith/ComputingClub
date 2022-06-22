@@ -8,22 +8,29 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
-import static com.example.computingclub.Util.changeScreen;
-import static com.example.computingclub.Util.saveUser;
+import static com.example.computingclub.Util.*;
+import static com.example.computingclub.Util.loadUser;
 
 public class VisitController implements Initializable {
     @FXML
@@ -165,5 +172,39 @@ public class VisitController implements Initializable {
         } else {
             btnFollow.setText("Seguir");
         }
+    }
+
+    @FXML
+    void actionSelectFollower(MouseEvent event) throws IOException, ClassNotFoundException {
+        String selected = listFollowers.getSelectionModel().getSelectedItem();
+
+        User current = loadUser("src/main/accounts/" + selected + ".ser");
+        // load searched name's user into visitor
+        VisitHolder visHolder = VisitHolder.getInstance();
+        visHolder.setUser(current);
+        // can't use the changescreen method because of mouseevent
+        Parent nextScene = FXMLLoader.load(Objects.requireNonNull(Util.class.getResource("visitScene.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(nextScene);
+        stage.setTitle("Perfil de " + current.getName());
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void actionSelectFollowing(MouseEvent event) throws IOException, ClassNotFoundException {
+        String selected = listFollowing.getSelectionModel().getSelectedItem();
+
+        User current = loadUser("src/main/accounts/" + selected + ".ser");
+        // load searched name's user into visitor
+        VisitHolder visHolder = VisitHolder.getInstance();
+        visHolder.setUser(current);
+        // can't use the changescreen method because of mouseevent
+        Parent nextScene = FXMLLoader.load(Objects.requireNonNull(Util.class.getResource("visitScene.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(nextScene);
+        stage.setTitle("Perfil de " + current.getName());
+        stage.setScene(scene);
+        stage.show();
     }
 }

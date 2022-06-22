@@ -1,11 +1,14 @@
 package com.example.computingclub;
 
 import com.example.computingclub.userset.User;
+import com.example.computingclub.userset.VisitHolder;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -34,5 +37,21 @@ public final class Util {
         User currentUsr = (User) ois.readObject();
         ois.close();
         return currentUsr;
+    }
+
+    public static void changeOnClick(MouseEvent event, ListView<String> listView) throws IOException, ClassNotFoundException {
+        String selected = listView.getSelectionModel().getSelectedItem();
+
+        User current = loadUser("src/main/accounts/" + selected + ".ser");
+        // load searched name's user into visitor
+        VisitHolder visHolder = VisitHolder.getInstance();
+        visHolder.setUser(current);
+        // can't use the changescreen method because of mouseevent
+        Parent nextScene = FXMLLoader.load(Objects.requireNonNull(Util.class.getResource("visitScene.fxml")));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(nextScene);
+        stage.setTitle("Perfil de " + current.getName());
+        stage.setScene(scene);
+        stage.show();
     }
 }
