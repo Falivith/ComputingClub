@@ -12,7 +12,7 @@ public class User implements Serializable {
 
     //
 
-    private String imgPath = "C:\\default.png";
+    private String imgPath = "";
     private String address = "";
     private String contact1 = "";
     private String contact2 = "";

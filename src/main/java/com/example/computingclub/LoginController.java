@@ -40,7 +40,20 @@ public class LoginController {
                 dummyFollow.add("");
 
                 User admin = new User("", "", dummyPostArray, dummyFollow, dummyFollow);
+
+                File default_pfp = new File("src/main/default.png");
+                admin.setImgPath(default_pfp.getAbsolutePath());
+
                 saveUser(admin, path);
+                // deletes deletemes if they exist
+                File deleteme1 = new File("src/main/admin/deleteme");
+                File deleteme2 = new File("src/main/accounts/deleteme");
+                if (deleteme1.exists()) {
+                    deleteme1.delete();
+                }
+                if (deleteme2.exists()) {
+                    deleteme2.delete();
+                }
             }
             changeScreen(event, "profileBuilderScene.fxml", "ADMIN - Criação");
         }else if (!loginField.getText().equals("admin")){

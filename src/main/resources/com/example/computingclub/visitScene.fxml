@@ -48,7 +48,7 @@
             <Label layoutX="546.0" layoutY="27.0" text="Posts" />
             <Pane layoutX="389.0" layoutY="275.0" prefHeight="120.0" prefWidth="123.0" style="-fx-background-color: gray;">
                <children>
-                  <ImageView fx:id="imgContainer" fitHeight="108.0" fitWidth="110.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imgContainer" fitHeight="108.0" fitWidth="110.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" />
                </children>
             </Pane>
          </children>

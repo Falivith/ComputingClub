@@ -10,8 +10,7 @@ import javafx.scene.control.TextField;
 import java.io.*;
 import java.util.ArrayList;
 
-import static com.example.computingclub.Util.changeScreen;
-import static com.example.computingclub.Util.saveUser;
+import static com.example.computingclub.Util.*;
 
 public class ProfileBuilderController {
     @FXML
@@ -24,7 +23,7 @@ public class ProfileBuilderController {
     //
 
     @FXML
-    void btnCreate(ActionEvent event) throws IOException {
+    void btnCreate(ActionEvent event) throws IOException, ClassNotFoundException {
         String path = "src/main/accounts/" + newUserField.getText() + ".ser";
         File user_file = new File(path);
 
@@ -41,6 +40,9 @@ public class ProfileBuilderController {
                 dummyFollowing.add(newUserField.getText());
                 // creates a new user
                 User newUser = new User(newUserField.getText(), newUserPassword.getText(), dummyPostArray, dummyFollower, dummyFollowing);
+                User admin = loadUser("src/main/admin/admin.ser");
+                newUser.setImgPath(admin.getImgPath());
+                //
                 saveUser(newUser, path);
                 userNotification.setText("Usuário criado com sucesso");
             }else {

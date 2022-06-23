@@ -47,7 +47,7 @@
       <Button layoutX="512.0" layoutY="136.0" mnemonicParsing="false" onAction="#changePhoto" text="Trocar Foto" />
       <Pane layoutX="488.0" layoutY="10.0" prefHeight="124.0" prefWidth="124.0" style="-fx-background-color: gray;">
          <children>
-            <ImageView fx:id="imgContainer" fitHeight="105.0" fitWidth="105.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgContainer" fitHeight="105.0" fitWidth="105.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" />
          </children>
       </Pane>
    </Pane>
